@@ -1,0 +1,194 @@
+*************************************************************************
+**   AndroBugs Framework - Android App Security Vulnerability Scanner  **
+**                            version: 1.0.0                           **
+**     author: Yu-Cheng Lin (@AndroBugs, http://www.AndroBugs.com)     **
+**               contact: androbugs.framework@gmail.com                **
+*************************************************************************
+Platform: Android
+Package Name: com.sadapay.app
+Package Version Name: 0.1.10762
+Package Version Code: 10762
+Min Sdk: 23
+Target Sdk: 34
+MD5   : eb484cc9564472f87851bcd43f3f9c97
+SHA1  : 958b588d3d6fd4d0d894d5c209ff6f770eaa90ce
+SHA256: 6e3a6cb910c9a4211f9afd8ac9c6da7b7be87f7cca8510348f8ecf09508fbfdc
+SHA512: 64df442637bd086d325ae2af81eb1c07535188420e8d8b1debfa0331c96dc2a454a49b536aed59807224e504e5ad1e152d2328544f9864312562eab67c097120
+Analyze Signature: 2f99690bb2b1f1a4a24c8f9a94018461acc967586a41e283a0e3b36189a6fcf9802b339ca785a56ca8cb7ddd5cf146b3d569db81fab002cb1f1a50a721738501
+------------------------------------------------------------------------------------------------
+[Critical]  AndroidManifest "intent-filter" Settings Checking:
+           Misconfiguration in "intent-filter" of these components (AndroidManifest.xml).
+           Config "intent-filter" should have at least one "action".
+           Reference: http://developer.android.com/guide/topics/manifest/intent-filter-element.html
+                 activity => androidx.test.core.app.InstrumentationActivityInvoker$BootstrapActivity
+                 activity => androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity
+                 activity => androidx.test.core.app.InstrumentationActivityInvoker$EmptyFloatingActivity
+[Critical] <SSL_Security> SSL Connection Checking:
+           URLs that are NOT under SSL (Total:3):
+               http://javax.xml.XMLConstants/feature/secure-processing
+                   => Lcom/chuckerteam/chucker/internal/data/entity/HttpTransaction;->formatBody(Ljava/lang/String;
+                    Ljava/lang/String;)Ljava/lang/String;
+               http://ns.adobe.com/xap/1.0/
+                   => Lb6/a;->j(Lu5/r; Lu5/u;)I
+               http://schemas.microsoft.com/DRM/2007/03/protocols/AcquireLicense
+                   => Lk5/c0;->n(Ljava/util/UUID; Lk5/v;)[B
+                   => Lk5/c0;->m(Ljava/util/UUID; Ldb/s;)[B
+[Warning]  External Storage Accessing:
+           External storage access found (Remember DO NOT write important files to external storages):
+               => Landroidx/core/content/FileProvider;->c(Ljava/lang/String; I Landroid/content/Context;)Lm3/k; (0xb8) --->
+                    Landroid/os/Environment;->getExternalStorageDirectory()Ljava/io/File;
+[Warning] <SSL_Security> SSL Certificate Verification Checking:
+           Please make sure this app has the conditions to check the validation of SSL Certificate. If it's not properly checked, it MAY
+           allows self-signed, expired or mismatch CN certificates for SSL connection.
+           This is a critical vulnerability and allows attackers to do MITM attacks without your knowledge.
+           If you are transmitting users' username or password, these sensitive information may be leaking.
+           Reference:
+           (1)OWASP Mobile Top 10 doc: https://www.owasp.org/index.php/Mobile_Top_10_2014-M3
+           (2)Android Security book: http://goo.gl/BFb65r
+           (3)https://www.securecoding.cert.org/confluence/pages/viewpage.action?pageId=134807561
+           This vulnerability is much more severe than Apple's "goto fail" vulnerability: http://goo.gl/eFlovw
+           Please do not try to create a "X509Certificate" and override "checkClientTrusted", "checkServerTrusted", and "getAcceptedIssuers"
+           functions with blank implementation.
+           We strongly suggest you use the existing API instead of creating your own X509Certificate class.
+           Please modify or remove these vulnerable code:
+               --------------------------------------------------
+               [Maybe Vulnerable (Please manually confirm)]
+               => Llf/b;
+               => Llf/a;
+[Notice] <Database><#CVE-2011-3901#> Android SQLite Databases Vulnerability Checking:
+           This app is using Android SQLite databases but it's "NOT" suffering from SQLite Journal Information Disclosure Vulnerability.
+[Notice]  File Unsafe Delete Checking:
+           Everything you delete may be recovered by any user or attacker, especially rooted devices.
+           Please make sure do not use "file.delete()" to delete essential files.
+           Check this video: https://www.youtube.com/watch?v=tGw1fxUD-uY
+               => Landroidx/camera/core/t;->e()Ljava/lang/Object; (0x50) ---> Ljava/io/File;->delete()Z
+               => Landroidx/core/content/FileProvider;->delete(Landroid/net/Uri; Ljava/lang/String; [Ljava/lang/String;)I (0x14) --->
+                    Ljava/io/File;->delete()Z
+               => Lcf/i;->a(Ljava/io/File; Ljava/lang/String;)Ljava/io/File; (0x24) ---> Ljava/io/File;->delete()Z
+               => Lcom/apptimize/ff$1;->run()V (0x62) ---> Ljava/io/File;->delete()Z
+               => Lcom/apptimize/gn;->a(Ljava/lang/String;)V (0xa0) ---> Ljava/io/File;->delete()Z
+               => Lcom/apptimize/gn;->a(Landroid/content/Context; Lcom/apptimize/au; Z)Z (0x62e) ---> Ljava/io/File;->delete()Z
+               => Lcom/apptimize/gn;->a(Landroid/content/Context; Lcom/apptimize/au; Z)Z (0x66a) ---> Ljava/io/File;->delete()Z
+               => Lcom/apptimize/gn;->a(Landroid/content/Context; Lcom/apptimize/au; Z)Z (0x692) ---> Ljava/io/File;->delete()Z
+               => Lcom/apptimize/gn;->a(Landroid/content/Context; Lcom/apptimize/au; Z)Z (0x6ba) ---> Ljava/io/File;->delete()Z
+               => Lcom/apptimize/gn;->a(Landroid/content/Context; Lcom/apptimize/au; Z)Z (0x6e2) ---> Ljava/io/File;->delete()Z
+               => Lcom/apptimize/gn;->a(Landroid/content/Context; Lcom/apptimize/au; Z)Z (0x742) ---> Ljava/io/File;->delete()Z
+               => Lcom/apptimize/gn;->a(Landroid/content/Context; Lcom/apptimize/au; Z)Z (0x750) ---> Ljava/io/File;->delete()Z
+               => Lcom/apptimize/ig$3;->run()V (0x86) ---> Ljava/io/File;->delete()Z
+               => Lff/e;->k(Lxg/d; Ljava/util/ArrayList;)V (0x8e) ---> Ljava/io/File;->delete()Z
+               => Lh9/n;->h(Landroid/content/Context; Ljava/util/zip/ZipInputStream; Ljava/lang/String;)Lh9/a0; (0x22c) --->
+                    Ljava/io/File;->delete()Z
+               => Lhb/b;->k(Ltk/f; Ljava/io/File; Z)V (0x98) ---> Ljava/io/File;->delete()Z
+               => Lx/b;->a()Lhj/p; (0x90) ---> Ljava/io/File;->delete()Z
+               => Lx9/d;->d()V (0xb6) ---> Ljava/io/File;->delete()Z
+               => Lx9/d;->e()V (0x82) ---> Ljava/io/File;->delete()Z
+               => Lx9/d;->f(Ljava/lang/String; Lw9/a;)V (0xca) ---> Ljava/io/File;->delete()Z
+               => Lx9/d;->l(Ljava/lang/String;)V (0xa) ---> Ljava/io/File;->delete()Z
+               => Lza/n;->t(Lhj/h;)Ljava/lang/Object; (0x194) ---> Ljava/io/File;->delete()Z
+[Notice] <Hacker> APK Installing Source Checking:
+           This app has code checking APK installer sources(e.g. from Google Play, from Amazon, etc.). It might be used to check for whether
+           the app is hacked by the attackers.
+               => Lff/e;->r(Landroid/content/Context;)Lbh/b; (0x2b4) --->
+                    Landroid/content/pm/PackageManager;->getInstallerPackageName(Ljava/lang/String;)Ljava/lang/String;
+[Notice] <KeyStore><Hacker> Possible KeyStore File Location:
+           BKS possible keystore file:
+               stamp-cert-sha256
+[Notice] <Signature><Hacker> Getting Signature Code Checking:
+           This app has code checking the package signature in the code. It might be used to check for whether the app is hacked by the
+           attackers.
+               => Lbh/f;->a(Landroid/content/Context; Ljava/lang/String;)Z (0x48) --->
+                    Landroid/content/pm/PackageManager;->getPackageInfo(Ljava/lang/String; I)Landroid/content/pm/PackageInfo;
+[Notice]  AndroidManifest Exported Components Checking 2:
+           Found "exported" components(except for Launcher) for receiving Google's "Android" actions (AndroidManifest.xml):
+                 activity => com.plaid.internal.LinkRedirectActivity
+                 activity => com.plaid.internal.link.LinkActivity
+[Info]  AndroidManifest Adb Backup Checking:
+           This app has disabled Adb Backup.
+[Info] <Command> Runtime Command Checking:
+           This app is not using critical function 'Runtime.getRuntime().exec("...")'.
+[Info] <Command> Executing "root" or System Privilege Checking:
+           Did not find codes checking "root" permission(su) or getting system permission (It's still possible we did not find out).
+[Info] <Database> SQLiteDatabase Transaction Deprecated Checking:
+           Ignore checking "SQLiteDatabase:beginTransactionNonExclusive" because your set minSdk >= 11.
+[Info] <Database> Android SQLite Databases Encryption (SQLite Encryption Extension (SEE)):
+           This app is "NOT" using SQLite Encryption Extension (SEE) on Android (http://www.sqlite.org/android) to encrypt or decrpyt
+           databases.
+[Info] <Database> Android SQLite Databases Encryption (SQLCipher):
+           This app is "NOT" using SQLCipher(http://sqlcipher.net/) to encrypt or decrpyt databases.
+[Info] <Debug> Android Debug Mode Checking:
+           DEBUG mode is OFF(android:debuggable="false") in AndroidManifest.xml.
+[Info]  Dynamic Code Loading:
+           No dynamic code loading(DexClassLoader) found.
+[Info] <#BID 64208, CVE-2013-6271#> Fragment Vulnerability Checking:
+           Did not detect the vulnerability of "Fragment" dynamically loading into "PreferenceActivity" or "SherlockPreferenceActivity"
+[Info] <Framework> Framework - MonoDroid:
+           This app is NOT using MonoDroid Framework (http://xamarin.com/android).
+[Info] <Hacker> Base64 String Encryption:
+           No encoded Base64 String or Urls found.
+[Info] <Database><Hacker> Key for Android SQLite Databases Encryption:
+           Did not find using the symmetric key(PRAGMA key) to encrypt the SQLite databases (It's still possible that it might use but we
+           did not find out).
+[Info] <Debug><Hacker> Codes for Checking Android Debug Mode:
+           Did not detect codes for checking "ApplicationInfo.FLAG_DEBUGGABLE" in AndroidManifest.xml.
+[Info] <KeyStore><Hacker> KeyStore Protection Checking:
+           Ignore checking KeyStore protected by password or not because you're not using KeyStore.
+[Info] <Hacker> Code Setting Preventing Screenshot Capturing:
+           Did not detect this app has code setting preventing screenshot capturing.
+[Info]  HttpURLConnection Android Bug Checking:
+           Ignore checking "http.keepAlive" because you're not using "HttpURLConnection" and min_Sdk > 8.
+[Info] <KeyStore> KeyStore Type Checking:
+           KeyStore 'BKS' type check OK
+[Info]  Google Cloud Messaging Suggestion:
+           Nothing to suggest.
+[Info] <#CVE-2013-4787#> Master Key Type I Vulnerability:
+           No Master Key Type I Vulnerability in this APK.
+[Info]  App Sandbox Permission Checking:
+           No security issues "MODE_WORLD_READABLE" or "MODE_WORLD_WRITEABLE" found on 'openOrCreateDatabase' or 'openOrCreateDatabase2' or
+           'getDir' or 'getSharedPreferences' or 'openFileOutput'
+[Info]  Native Library Loading Checking:
+           No native library loaded.
+[Info]  AndroidManifest Dangerous ProtectionLevel of Permission Checking:
+           No "dangerous" protection level customized permission found (AndroidManifest.xml).
+[Info]  AndroidManifest PermissionGroup Checking:
+           PermissionGroup in permission tag of AndroidManifest sets correctly.
+[Info] <Implicit_Intent> Implicit Service Checking:
+           No dangerous implicit service.
+[Info]  AndroidManifest Normal ProtectionLevel of Permission Checking:
+           No default or "normal" protection level customized permission found (AndroidManifest.xml).
+[Info] <#CVE-2013-6272#> AndroidManifest Exported Lost Prefix Checking:
+           No exported components that forgot to add "android:" prefix.
+[Info]  AndroidManifest ContentProvider Exported Checking:
+           No exported "ContentProvider" found (AndroidManifest.xml).
+[Info] <Sensitive_Information> Getting IMEI and Device ID:
+           Did not detect this app is getting the "device id(IMEI)" by "TelephonyManager.getDeviceId()" approach.
+[Info] <Sensitive_Information> Getting ANDROID_ID:
+           Did not detect this app is getting the 64-bit number "Settings.Secure.ANDROID_ID".
+[Info]  Codes for Sending SMS:
+           Did not detect this app has code for sending SMS messages (sendDataMessage, sendMultipartTextMessage or sendTextMessage).
+[Info] <System> AndroidManifest sharedUserId Checking:
+           This app does not use "android.uid.system" sharedUserId.
+[Info] <SSL_Security> SSL Implementation Checking (Verifying Host Name in Custom Classes):
+           Self-defined HOSTNAME VERIFIER checking OK.
+[Info] <SSL_Security> SSL Implementation Checking (Verifying Host Name in Fields):
+           Critical vulnerability "ALLOW_ALL_HOSTNAME_VERIFIER" field setting or "AllowAllHostnameVerifier" class instance not found.
+[Info] <SSL_Security> SSL Implementation Checking (Insecure component):
+           Did not detect SSLSocketFactory by insecure method "getInsecure".
+[Info] <SSL_Security> SSL Implementation Checking (HttpHost):
+           DEFAULT_SCHEME_NAME for HttpHost check: OK
+[Info] <SSL_Security> SSL Implementation Checking (WebViewClient for WebView):
+           Did not detect critical usage of "WebViewClient"(MITM Vulnerability).
+[Info]  Unnecessary Permission Checking:
+           Permission 'android.permission.ACCESS_MOCK_LOCATION' sets correctly.
+[Info]  Accessing the Internet Checking:
+           This app is using the Internet via HTTP protocol.
+[Info]  AndroidManifest System Use Permission Checking:
+           No system-level critical use-permission found.
+[Info] <WebView> WebView Local File Access Attacks Checking:
+           Did not find potentially critical local file access settings.
+[Info] <WebView> WebView Potential XSS Attacks Checking:
+           Did not detect "setJavaScriptEnabled(true)" in WebView.
+[Info] <WebView><Remote Code Execution><#CVE-2013-4710#> WebView RCE Vulnerability Checking:
+           WebView addJavascriptInterface vulnerabilities not found.
+------------------------------------------------------------
+AndroBugs analyzing time: 17.064 secs
+Total elapsed time: 49.628 secs

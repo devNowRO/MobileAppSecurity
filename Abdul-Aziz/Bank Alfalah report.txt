@@ -1,0 +1,461 @@
+*************************************************************************
+**   AndroBugs Framework - Android App Security Vulnerability Scanner  **
+**                            version: 1.0.0                           **
+**     author: Yu-Cheng Lin (@AndroBugs, http://www.AndroBugs.com)     **
+**               contact: androbugs.framework@gmail.com                **
+*************************************************************************
+Platform: Android
+Package Name: com.base.bankalfalah
+Package Version Name: 2.8.2
+Package Version Code: 310
+Min Sdk: 23
+Target Sdk: 33
+MD5   : 0b8898b3cd6feb553784606e7f9b81f3
+SHA1  : cef129d8f21a171b8c2e071fba3c32c954b9d75b
+SHA256: a6f5c0de4cf401c2769cffd1de52366f7ddd5d52537c2b59f40dbc23e871a91d
+SHA512: 009d2868a237849f4ed787adf1571ad48272d01786184e928da9da951a2f067b1328c3b2d8a4a16eb07715da44a793b380eeb5c136360e68eabe9e3dcadc5a15
+Analyze Signature: 5f9b11f642e040dc48f0612087c8ce4a81ebcdafcd5986e000fd7c544c051b97d52863843169ac058b62b0b2275caefe99264e9c75e87bca6d4125c97631234e
+------------------------------------------------------------------------------------------------
+[Critical] <Hacker> Base64 String Encryption:
+           Found Base64 encoding "String(s)" (Total: 1). We cannot guarantee all of the Strings are Base64 encoding and also we will not
+           show you the decoded binary file:
+               jYAjy,
+                   ->Original Encoding String: allBanks
+                   ->From class:
+                    Lcom/base/bankalfalah/openalfa/loansJourney/views/MarkupPaymentActivity;->MediaDescriptionCompat(Ljava/lang/String;
+                    Lcom/base/bankalfalah/utils/RxResponseModel;)V
+                   ->From class:
+                    Lcom/base/bankalfalah/openalfa/creditCardFacilities/View/BalanceTransferFactivity;->AppCompatActivity(Lorg/json/JSONObje
+                    ct; Ljava/lang/String;)V
+[Critical]  App Sandbox Permission Checking:
+           Security issues "MODE_WORLD_READABLE" or "MODE_WORLD_WRITEABLE" found (Please check:
+           https://www.owasp.org/index.php/Mobile_Top_10_2014-M2):
+               [getSharedPreferences]
+               => Lx/ViewModelKt;->getQuery(Ljava/lang/String;)Landroid/content/SharedPreferences; (0x44) --->
+                    Landroid/content/Context;->getSharedPreferences(Ljava/lang/String; I)Landroid/content/SharedPreferences;
+               --------------------------------------------------
+[Critical] <Implicit_Intent> Implicit Service Checking:
+           To ensure your app is secure, always use an explicit intent when starting a Service and DO NOT declare intent filters for your
+           services. Using an implicit intent to start a service is a security hazard because you cannot be certain what service will
+           respond to the intent, and the user cannot see which service starts.
+           Reference: http://developer.android.com/guide/components/intents-filters.html#Types
+               => com.ceesolutions.alfalah.utils.SignalRService
+[Critical] <SSL_Security> SSL Implementation Checking (Verifying Host Name in Custom Classes):
+           This app allows Self-defined HOSTNAME VERIFIER to accept all Common Names(CN).
+           This is a critical vulnerability and allows attackers to do MITM attacks with his valid certificate without your knowledge.
+           Case example:
+           (1)http://osvdb.org/96411
+           (2)http://www.wooyun.org/bugs/wooyun-2010-042710
+           (3)http://www.wooyun.org/bugs/wooyun-2010-052339
+           Also check Google doc: http://developer.android.com/training/articles/security-ssl.html (Caution: Replacing HostnameVerifier can
+           be very dangerous).
+           OWASP Mobile Top 10 doc: https://www.owasp.org/index.php/Mobile_Top_10_2014-M3
+           Check this book to see how to solve this issue: http://goo.gl/BFb65r
+
+           To see what's the importance of Common Name(CN) verification.
+           Use Google Chrome to navigate:
+            - https://www.google.com   => SSL certificate is valid
+            - https://60.199.175.158/  => This is the IP address of google.com, but the CN is not match, making the certificate invalid. You
+           still can go Google.com but now you cannot distinguish attackers from normal users
+
+           Please check the code inside these methods:
+               Lx/localError$3;->verify(Ljava/lang/String; Ljavax/net/ssl/SSLSession;)Z
+[Warning]  External Storage Accessing:
+           External storage access found (Remember DO NOT write important files to external storages):
+               => Lcom/aditya/filebrowser/Constants;-><clinit>()V (0x12a) --->
+                    Landroid/os/Environment;->getExternalStorageDirectory()Ljava/io/File;
+               => Lcom/ceesolutions/alfalah/chatMessenger/ChatMessengerScreen$OnBackPressedDispatcher$LifecycleOnBackPressedCancellable;->on
+                    Start()V (0x78) ---> Landroid/os/Environment;->getExternalStorageDirectory()Ljava/io/File;
+               => Lcom/ceesolutions/alfalah/chatMessenger/ChatMessengerScreen$OnBackPressedDispatcher$LifecycleOnBackPressedCancellable;->on
+                    Start()V (0xc0) ---> Landroid/os/Environment;->getExternalStorageDirectory()Ljava/io/File;
+               => Lx/ActivityResultRegistry$1;->onClick(Landroid/view/View;)V (0x4) --->
+                    Landroid/os/Environment;->getExternalStorageDirectory()Ljava/io/File;
+               => Lx/Keep$MediaMetadataCompat;->doInBackground([Ljava/lang/Object;)Ljava/lang/Object; (0xc) --->
+                    Landroid/os/Environment;->getExternalStorageDirectory()Ljava/io/File;
+               => Lx/PopupLayout$canCalculatePosition$2;->RemoteActionCompatParcelizer(Landroid/content/Context; Ljava/lang/String;
+                    I)Lx/PopupLayout$canCalculatePosition$2$e$a; (0x11a) --->
+                    Landroid/os/Environment;->getExternalStorageDirectory()Ljava/io/File;
+               => Lx/R$anim;->onClick(Landroid/view/View;)V (0x14) --->
+                    Landroid/os/Environment;->getExternalStorageDirectory()Ljava/io/File;
+               => Lx/R$attr;->onClick(Landroid/view/View;)V (0x4) ---> Landroid/os/Environment;->getExternalStorageDirectory()Ljava/io/File;
+               => Lx/R$bool;->onClick(Landroid/view/View;)V (0x280) --->
+                    Landroid/os/Environment;->getExternalStorageDirectory()Ljava/io/File;
+               => Lx/R$bool;->onClick(Landroid/view/View;)V (0x4e2) --->
+                    Landroid/os/Environment;->getExternalStorageDirectory()Ljava/io/File;
+               => Lx/R$bool;->onClick(Landroid/view/View;)V (0x604) --->
+                    Landroid/os/Environment;->getExternalStorageDirectory()Ljava/io/File;
+               => Lx/R$color;->onClick(Landroid/view/View;)V (0x4) --->
+                    Landroid/os/Environment;->getExternalStorageDirectory()Ljava/io/File;
+               => Lx/R$dimen;->onClick(Landroid/view/View;)V (0x4) --->
+                    Landroid/os/Environment;->getExternalStorageDirectory()Ljava/io/File;
+               => Lx/R$integer;->onClick(Landroid/view/View;)V (0x14) --->
+                    Landroid/os/Environment;->getExternalStorageDirectory()Ljava/io/File;
+               => Lx/trackNewSessionI$2;->run()V (0xb0) ---> Landroid/os/Environment;->getExternalStorageDirectory()Ljava/io/File;
+               => Lx/Keep;->MediaBrowserCompat$CustomActionResultReceiver(I)Z (0x5e) --->
+                    Landroid/os/Environment;->getExternalStorageDirectory()Ljava/io/File;
+               => Lx/Keep;->MediaBrowserCompat$CustomActionResultReceiver(I)Z (0x126) --->
+                    Landroid/os/Environment;->getExternalStorageDirectory()Ljava/io/File;
+               => Lx/Keep;->MediaBrowserCompat$CustomActionResultReceiver(I)Z (0x1de) --->
+                    Landroid/os/Environment;->getExternalStorageDirectory()Ljava/io/File;
+               => Lx/Keep;->onErrorResponse(Landroidx/recyclerview/widget/RecyclerView$ComponentActivity$3; I)V (0xdd0) --->
+                    Landroid/os/Environment;->getExternalStorageDirectory()Ljava/io/File;
+               => Lx/Keep;->onErrorResponse(Landroidx/recyclerview/widget/RecyclerView$ComponentActivity$3; I)V (0x1330) --->
+                    Landroid/os/Environment;->getExternalStorageDirectory()Ljava/io/File;
+               => Lx/Keep;->onErrorResponse(Landroidx/recyclerview/widget/RecyclerView$ComponentActivity$3; I)V (0x1820) --->
+                    Landroid/os/Environment;->getExternalStorageDirectory()Ljava/io/File;
+               => Lx/Keep;->onErrorResponse(Landroidx/recyclerview/widget/RecyclerView$ComponentActivity$3; I)V (0x1a6a) --->
+                    Landroid/os/Environment;->getExternalStorageDirectory()Ljava/io/File;
+               => Lx/Keep;->onErrorResponse(Landroidx/recyclerview/widget/RecyclerView$ComponentActivity$3; I)V (0x30d8) --->
+                    Landroid/os/Environment;->getExternalStorageDirectory()Ljava/io/File;
+               => Lx/Keep;->onErrorResponse(Landroidx/recyclerview/widget/RecyclerView$ComponentActivity$3; I)V (0x361e) --->
+                    Landroid/os/Environment;->getExternalStorageDirectory()Ljava/io/File;
+               => Lx/Keep;->onErrorResponse(Landroidx/recyclerview/widget/RecyclerView$ComponentActivity$3; I)V (0x388e) --->
+                    Landroid/os/Environment;->getExternalStorageDirectory()Ljava/io/File;
+               => Lx/Keep;->onErrorResponse(Landroidx/recyclerview/widget/RecyclerView$ComponentActivity$3; I)V (0x3d50) --->
+                    Landroid/os/Environment;->getExternalStorageDirectory()Ljava/io/File;
+               => Lx/Keep;->onErrorResponse(Landroidx/recyclerview/widget/RecyclerView$ComponentActivity$3; I)V (0x3f68) --->
+                    Landroid/os/Environment;->getExternalStorageDirectory()Ljava/io/File;
+               => Lx/Keep;->onErrorResponse(Landroidx/recyclerview/widget/RecyclerView$ComponentActivity$3; I)V (0x4e2e) --->
+                    Landroid/os/Environment;->getExternalStorageDirectory()Ljava/io/File;
+               => Lx/Keep;->onErrorResponse(Landroidx/recyclerview/widget/RecyclerView$ComponentActivity$3; I)V (0x81ee) --->
+                    Landroid/os/Environment;->getExternalStorageDirectory()Ljava/io/File;
+               => Lx/Keep;->onErrorResponse(Landroidx/recyclerview/widget/RecyclerView$ComponentActivity$3; I)V (0x83c2) --->
+                    Landroid/os/Environment;->getExternalStorageDirectory()Ljava/io/File;
+               => Lx/getInflater$values;->onErrorResponse(Lorg/json/JSONObject;)V (0x2c) --->
+                    Landroid/os/Environment;->getExternalStorageDirectory()Ljava/io/File;
+[Warning]  AndroidManifest Exported Components Checking:
+           Found "exported" components(except for Launcher) for receiving outside applications' actions (AndroidManifest.xml).
+           These components can be initilized by other apps. You should add or modify the attribute to [exported="false"] if you don't want
+           to.
+           You can also protect it with a customized permission with "signature" or higher protectionLevel and specify in
+           "android:permission" attribute.
+                  service => com.ceesolutions.alfalah.utils.SignalRService
+                 receiver => com.base.bankalfalah.utils.AlfaChatBroadCastReceiver
+[Warning] <Sensitive_Information> Getting ANDROID_ID:
+           This app has code getting the 64-bit number "Settings.Secure.ANDROID_ID".
+           ANDROID_ID seems a good choice for a unique device identifier. There are downsides: First, it is not 100% reliable on releases of
+           Android prior to 2.2 (Froyo).
+           Also, there has been at least one widely-observed bug in a popular handset from a major manufacturer, where every instance has
+           the same ANDROID_ID.
+           If you want to get an unique id for the device, we suggest you use "Installation" framework in the following article.
+           Please check the reference: http://android-developers.blogspot.tw/2011/03/identifying-app-installations.html
+               => Lcom/adjust/sdk/AndroidIdUtil;->getAndroidId(Landroid/content/Context;)Ljava/lang/String; (0xc) --->
+                    Landroid/provider/Settings$Secure;->getString(Landroid/content/ContentResolver; Ljava/lang/String;)Ljava/lang/String;
+               => Lx/LoanRequirementFragment$onClick$2;->finishTask()Ljava/lang/String; (0x24) --->
+                    Landroid/provider/Settings$Secure;->getString(Landroid/content/ContentResolver; Ljava/lang/String;)Ljava/lang/String;
+               => Lcom/base/bankalfalah/openalfa/home/views/SplashActivity;->CrashlyticsController$$ExternalSyntheticLambda0()V (0x112) --->
+                    Landroid/provider/Settings$Secure;->getString(Landroid/content/ContentResolver; Ljava/lang/String;)Ljava/lang/String;
+               => Lcom/base/bankalfalah/openalfa/notification/views/ShowNotificationActivity;->finalizeSessions()Ljava/util/LinkedHashMap;
+                    (0xc) ---> Landroid/provider/Settings$Secure;->getString(Landroid/content/ContentResolver;
+                    Ljava/lang/String;)Ljava/lang/String;
+[Warning] <SSL_Security> SSL Certificate Verification Checking:
+           Please make sure this app has the conditions to check the validation of SSL Certificate. If it's not properly checked, it MAY
+           allows self-signed, expired or mismatch CN certificates for SSL connection.
+           This is a critical vulnerability and allows attackers to do MITM attacks without your knowledge.
+           If you are transmitting users' username or password, these sensitive information may be leaking.
+           Reference:
+           (1)OWASP Mobile Top 10 doc: https://www.owasp.org/index.php/Mobile_Top_10_2014-M3
+           (2)Android Security book: http://goo.gl/BFb65r
+           (3)https://www.securecoding.cert.org/confluence/pages/viewpage.action?pageId=134807561
+           This vulnerability is much more severe than Apple's "goto fail" vulnerability: http://goo.gl/eFlovw
+           Please do not try to create a "X509Certificate" and override "checkClientTrusted", "checkServerTrusted", and "getAcceptedIssuers"
+           functions with blank implementation.
+           We strongly suggest you use the existing API instead of creating your own X509Certificate class.
+           Please modify or remove these vulnerable code:
+               --------------------------------------------------
+               [Maybe Vulnerable (Please manually confirm)]
+               => Lcom/base/bankalfalah/AlfaGlideModule$1;
+                     -> used by: Lcom/base/bankalfalah/AlfaGlideModule;->AppEventsLogger$FlushBehavior()Lx/zzkk;
+               => Lx/localError$5;
+                     -> used by: Lx/localError;->e$a(Lx/zzkk$valueOf;)V
+[Warning] <WebView> WebView Local File Access Attacks Checking:
+           Found "setAllowFileAccess(true)" or not set(enabled by default) in WebView. The attackers could inject malicious script into
+           WebView and exploit the opportunity to access local resources. This can be mitigated or prevented by disabling local file system
+           access. (It is enabled by default)
+           Note that this enables or disables file system access only. Assets and resources are still accessible using file:///android_asset
+           and file:///android_res.
+           The attackers can use "mWebView.loadUrl("file:///data/data/[Your_Package_Name]/[File]");" to access app's local file.
+           Reference: (1)https://labs.mwrinfosecurity.com/blog/2012/04/23/adventures-with-android-webviews/
+                      (2)http://developer.android.com/reference/android/webkit/WebSettings.html#setAllowFileAccess(boolean)
+           Please add or modify "yourWebView.getSettings().setAllowFileAccess(false)" to your WebView:
+               Lcom/base/bankalfalah/openalfa/AlfaWebViewActivity;->getSplitTrack(Z)V
+               Lcom/base/bankalfalah/openalfa/CrossSellActivity;->IGmsCallbacks()V
+               Lcom/base/bankalfalah/openalfa/IPSWebViewActivity;->IGmsCallbacks()V
+               Lcom/base/bankalfalah/openalfa/OPSWebViewActivity;->getSplitTrack(Z)V
+               Lcom/base/bankalfalah/openalfa/PassCodeActivity;->createString()V
+               Lcom/base/bankalfalah/openalfa/accountopening/views/AOEnterDetailsActivity;->IGmsCallbacks()V
+               Lcom/base/bankalfalah/openalfa/accountopening/views/AddAOEnterDetailsActivity;->IGmsCallbacks()V
+               Lcom/base/bankalfalah/openalfa/accountopeningnew/RapidWebViewActivity;->IGmsCallbacks()V
+               Lcom/base/bankalfalah/openalfa/alfacredit/AlfaCreditDetailsActivity;->createString()V
+               Lcom/base/bankalfalah/openalfa/alfacredit/PassCodeActivity;->createString()V
+               Lcom/base/bankalfalah/openalfa/bankerChequeRequest/NoteBankerChequeBookActivity;->createString()V
+               Lcom/base/bankalfalah/openalfa/bookingWebView/BookingWebView;->onCreate(Landroid/os/Bundle;)V
+               Lcom/base/bankalfalah/openalfa/creditCardFacilities/View/BalanceTransferFactivity;->createString()V
+               Lcom/base/bankalfalah/openalfa/creditCardFacilities/View/CashOnPhoneActivity;->createString()V
+               Lcom/base/bankalfalah/openalfa/creditCardFacilities/View/CreditCardProcedureActivity;->createString()V
+               Lcom/base/bankalfalah/openalfa/creditCardFacilities/View/DebitCardEnrollmentActivity;->createString()V
+               Lcom/base/bankalfalah/openalfa/creditCardFacilities/View/ProductFinanceActivity;->onCreate(Landroid/os/Bundle;)V
+               Lcom/base/bankalfalah/openalfa/creditCardFacilities/View/SBSMainActivity;->createString()V
+               Lcom/base/bankalfalah/openalfa/footer/views/AboutUsActivity;->IntrinsicMeasureBlocks$VerticalMinHeight$1$1(Ljava/lang/String;
+                    )V
+               Lcom/base/bankalfalah/openalfa/healthInsurance/activities/HealthInsuranceAgreementActivity;->EventBus()V
+               Lcom/base/bankalfalah/openalfa/home/views/CoolOffActivity;->ItemFoundInScroll(Ljava/lang/String;)V
+               Lcom/base/bankalfalah/openalfa/instantCreditCard/views/Icc_Screen9Activity;->onCreate(Landroid/os/Bundle;)V
+               Lcom/base/bankalfalah/openalfa/instantCreditCard/views/Icc_Screen9Activity;->persistRelevantAppExitInfoEvent()V
+               Lcom/base/bankalfalah/openalfa/instantCreditCard/views/Icc_Screen9Activity;->sendReports()V
+               Lcom/base/bankalfalah/openalfa/insurance/activities/LifeInsuranceAgreementActivity;->EventBus()V
+               Lcom/base/bankalfalah/openalfa/ips/IPSAgreementActivity;->EventBus()V
+               Lcom/base/bankalfalah/openalfa/islamicTDR/activities/IslamicWHTCertificateActivity;->getCommonFiles()V
+               Lcom/base/bankalfalah/openalfa/islamicTDR/activities/IslamicWHTCertificateActivityRevamped;->getCommonFiles()V
+               Lcom/base/bankalfalah/openalfa/loansJourney/views/Screen5_PasscodeActivity;->onCreate(Landroid/os/Bundle;)V
+               Lcom/base/bankalfalah/openalfa/loansJourney/views/Screen5_WalletPasscodeActivity;->onCreate(Landroid/os/Bundle;)V
+               Lcom/base/bankalfalah/openalfa/mutualFunds/revamp/view/InvestFundActivity;->zzcb()V
+               Lcom/base/bankalfalah/openalfa/mutualFunds/revamp/view/fullFledge/FullFledgeTCActivity;->onCreate(Landroid/os/Bundle;)V
+               Lcom/base/bankalfalah/openalfa/orbits/OnlineCatalogueWebViewActivity;->IGmsCallbacks()V
+               Lx/getFailureMessage;->getTextOff(Landroid/view/View;)V
+               Lx/launchSessionResponseTasks;->valueOf(Landroid/app/Activity; Ljava/lang/String; Ljava/lang/String; Ljava/lang/String;
+                    Ljava/lang/String;)V
+               Lx/launchSessionResponseTasks;->valueOf(Landroid/app/Activity; Ljava/lang/String; Ljava/lang/String;
+                    Lx/launchSessionResponseTasks$e$a;)V
+               Lx/launchSessionResponseTasks;->valueOf(Landroid/app/Activity; Ljava/lang/String; Ljava/lang/String;)V
+[Warning] <WebView> WebView Potential XSS Attacks Checking:
+           Found "setJavaScriptEnabled(true)" in WebView, which could exposed to potential XSS attacks. Please check the web page code
+           carefully and sanitize the output:
+               => Lcom/base/bankalfalah/openalfa/AlfaWebViewActivity;->getSplitTrack(Z)V (0x34) --->
+                    Landroid/webkit/WebSettings;->setJavaScriptEnabled(Z)V
+               => Lcom/base/bankalfalah/openalfa/AlfaWebViewActivity;->getSplitTrack(Z)V (0xee) --->
+                    Landroid/webkit/WebSettings;->setJavaScriptEnabled(Z)V
+               => Lcom/base/bankalfalah/openalfa/CrossSellActivity;->IGmsCallbacks()V (0x24) --->
+                    Landroid/webkit/WebSettings;->setJavaScriptEnabled(Z)V
+               => Lcom/base/bankalfalah/openalfa/IPSWebViewActivity;->IGmsCallbacks()V (0x34) --->
+                    Landroid/webkit/WebSettings;->setJavaScriptEnabled(Z)V
+               => Lcom/base/bankalfalah/openalfa/IPSWebViewActivity;->IGmsCallbacks()V (0x10a) --->
+                    Landroid/webkit/WebSettings;->setJavaScriptEnabled(Z)V
+               => Lcom/base/bankalfalah/openalfa/OPSWebViewActivity;->getSplitTrack(Z)V (0x34) --->
+                    Landroid/webkit/WebSettings;->setJavaScriptEnabled(Z)V
+               => Lcom/base/bankalfalah/openalfa/OPSWebViewActivity;->getSplitTrack(Z)V (0xb2) --->
+                    Landroid/webkit/WebSettings;->setJavaScriptEnabled(Z)V
+               => Lcom/base/bankalfalah/openalfa/accountopening/views/AOEnterDetailsActivity;->IGmsCallbacks()V (0x24) --->
+                    Landroid/webkit/WebSettings;->setJavaScriptEnabled(Z)V
+               => Lcom/base/bankalfalah/openalfa/accountopening/views/AddAOEnterDetailsActivity;->IGmsCallbacks()V (0x24) --->
+                    Landroid/webkit/WebSettings;->setJavaScriptEnabled(Z)V
+               => Lcom/base/bankalfalah/openalfa/accountopeningnew/RapidWebViewActivity;->IGmsCallbacks()V (0x20) --->
+                    Landroid/webkit/WebSettings;->setJavaScriptEnabled(Z)V
+               => Lcom/base/bankalfalah/openalfa/accountopeningnew/RapidWebViewActivity;->IGmsCallbacks()V (0x106) --->
+                    Landroid/webkit/WebSettings;->setJavaScriptEnabled(Z)V
+               => Lcom/base/bankalfalah/openalfa/alfacredit/AlfaCreditDetailsActivity;->createString()V (0x92) --->
+                    Landroid/webkit/WebSettings;->setJavaScriptEnabled(Z)V
+               => Lcom/base/bankalfalah/openalfa/bankerChequeRequest/NoteBankerChequeBookActivity;->createString()V (0x8c) --->
+                    Landroid/webkit/WebSettings;->setJavaScriptEnabled(Z)V
+               => Lcom/base/bankalfalah/openalfa/bookingWebView/BookingWebView;->onCreate(Landroid/os/Bundle;)V (0x8ee) --->
+                    Landroid/webkit/WebSettings;->setJavaScriptEnabled(Z)V
+               => Lcom/base/bankalfalah/openalfa/creditCardFacilities/View/BalanceTransferFactivity;->createString()V (0x8c) --->
+                    Landroid/webkit/WebSettings;->setJavaScriptEnabled(Z)V
+               => Lcom/base/bankalfalah/openalfa/creditCardFacilities/View/CashOnPhoneActivity;->createString()V (0x94) --->
+                    Landroid/webkit/WebSettings;->setJavaScriptEnabled(Z)V
+               => Lcom/base/bankalfalah/openalfa/creditCardFacilities/View/CreditCardProcedureActivity;->createString()V (0x8c) --->
+                    Landroid/webkit/WebSettings;->setJavaScriptEnabled(Z)V
+               => Lcom/base/bankalfalah/openalfa/creditCardFacilities/View/DebitCardEnrollmentActivity;->createString()V (0x90) --->
+                    Landroid/webkit/WebSettings;->setJavaScriptEnabled(Z)V
+               => Lcom/base/bankalfalah/openalfa/creditCardFacilities/View/ProductFinanceActivity;->onCreate(Landroid/os/Bundle;)V (0xd04)
+                    ---> Landroid/webkit/WebSettings;->setJavaScriptEnabled(Z)V
+               => Lcom/base/bankalfalah/openalfa/creditCardFacilities/View/SBSMainActivity;->createString()V (0x8e) --->
+                    Landroid/webkit/WebSettings;->setJavaScriptEnabled(Z)V
+               => Lcom/base/bankalfalah/openalfa/footer/views/AboutUsActivity;->IntrinsicMeasureBlocks$VerticalMinHeight$1$1(Ljava/lang/Stri
+                    ng;)V (0x36) ---> Landroid/webkit/WebSettings;->setJavaScriptEnabled(Z)V
+               => Lcom/base/bankalfalah/openalfa/healthInsurance/activities/HealthInsuranceAgreementActivity;->EventBus()V (0x4c) --->
+                    Landroid/webkit/WebSettings;->setJavaScriptEnabled(Z)V
+               => Lcom/base/bankalfalah/openalfa/home/views/CoolOffActivity;->ItemFoundInScroll(Ljava/lang/String;)V (0x48) --->
+                    Landroid/webkit/WebSettings;->setJavaScriptEnabled(Z)V
+               => Lcom/base/bankalfalah/openalfa/insurance/activities/LifeInsuranceAgreementActivity;->EventBus()V (0x88) --->
+                    Landroid/webkit/WebSettings;->setJavaScriptEnabled(Z)V
+               => Lcom/base/bankalfalah/openalfa/ips/IPSAgreementActivity;->EventBus()V (0x60) --->
+                    Landroid/webkit/WebSettings;->setJavaScriptEnabled(Z)V
+               => Lcom/base/bankalfalah/openalfa/islamicTDR/activities/IslamicWHTCertificateActivity;->getCommonFiles()V (0xe) --->
+                    Landroid/webkit/WebSettings;->setJavaScriptEnabled(Z)V
+               => Lcom/base/bankalfalah/openalfa/islamicTDR/activities/IslamicWHTCertificateActivityRevamped;->getCommonFiles()V (0xe) --->
+                    Landroid/webkit/WebSettings;->setJavaScriptEnabled(Z)V
+               => Lcom/base/bankalfalah/openalfa/mutualFunds/revamp/view/InvestFundActivity;->zzcb()V (0x30a) --->
+                    Landroid/webkit/WebSettings;->setJavaScriptEnabled(Z)V
+               => Lcom/base/bankalfalah/openalfa/mutualFunds/revamp/view/fullFledge/FullFledgeTCActivity;->onCreate(Landroid/os/Bundle;)V
+                    (0x8b4) ---> Landroid/webkit/WebSettings;->setJavaScriptEnabled(Z)V
+               => Lcom/base/bankalfalah/openalfa/orbits/OnlineCatalogueWebViewActivity;->IGmsCallbacks()V (0x34) --->
+                    Landroid/webkit/WebSettings;->setJavaScriptEnabled(Z)V
+               => Lcom/base/bankalfalah/openalfa/orbits/OnlineCatalogueWebViewActivity;->IGmsCallbacks()V (0x126) --->
+                    Landroid/webkit/WebSettings;->setJavaScriptEnabled(Z)V
+               => Lcom/base/bankalfalah/openalfa/PassCodeActivity;->createString()V (0x34) --->
+                    Landroid/webkit/WebSettings;->setJavaScriptEnabled(Z)V
+               => Lcom/base/bankalfalah/openalfa/alfacredit/PassCodeActivity;->createString()V (0x34) --->
+                    Landroid/webkit/WebSettings;->setJavaScriptEnabled(Z)V
+               => Lcom/base/bankalfalah/openalfa/instantCreditCard/views/Icc_Screen9Activity;->onCreate(Landroid/os/Bundle;)V (0xbec) --->
+                    Landroid/webkit/WebSettings;->setJavaScriptEnabled(Z)V
+               => Lcom/base/bankalfalah/openalfa/instantCreditCard/views/Icc_Screen9Activity;->onCreate(Landroid/os/Bundle;)V (0xd1e) --->
+                    Landroid/webkit/WebSettings;->setJavaScriptEnabled(Z)V
+               => Lcom/base/bankalfalah/openalfa/instantCreditCard/views/Icc_Screen9Activity;->persistRelevantAppExitInfoEvent()V (0xe) --->
+                    Landroid/webkit/WebSettings;->setJavaScriptEnabled(Z)V
+               => Lcom/base/bankalfalah/openalfa/instantCreditCard/views/Icc_Screen9Activity;->sendReports()V (0xe) --->
+                    Landroid/webkit/WebSettings;->setJavaScriptEnabled(Z)V
+               => Lcom/base/bankalfalah/openalfa/loansJourney/views/Screen5_WalletPasscodeActivity;->onCreate(Landroid/os/Bundle;)V (0xb2a)
+                    ---> Landroid/webkit/WebSettings;->setJavaScriptEnabled(Z)V
+[Notice] <Database><#CVE-2011-3901#> Android SQLite Databases Vulnerability Checking:
+           This app is using Android SQLite databases but it's "NOT" suffering from SQLite Journal Information Disclosure Vulnerability.
+[Notice]  File Unsafe Delete Checking:
+           Everything you delete may be recovered by any user or attacker, especially rooted devices.
+           Please make sure do not use "file.delete()" to delete essential files.
+           Check this video: https://www.youtube.com/watch?v=tGw1fxUD-uY
+               => Landroidx/multidex/MultiDexExtractor;->PayeeOTPActivity()V (0xb2) ---> Ljava/io/File;->delete()Z
+               => Landroidx/multidex/MultiDexExtractor;->values(Ljava/util/zip/ZipFile; Ljava/util/zip/ZipEntry; Ljava/io/File;
+                    Ljava/lang/String;)V (0x134) ---> Ljava/io/File;->delete()Z
+               => Landroidx/multidex/MultiDexExtractor;->values(Ljava/util/zip/ZipFile; Ljava/util/zip/ZipEntry; Ljava/io/File;
+                    Ljava/lang/String;)V (0x1fe) ---> Ljava/io/File;->delete()Z
+               => Lx/ConstraintReference$IncorrectConstraintException;->RemoteActionCompatParcelizer(Landroid/content/Context;
+                    Ljava/io/InputStream;)Landroid/graphics/Typeface; (0x1c) ---> Ljava/io/File;->delete()Z
+               => Lx/ConstraintReference$IncorrectConstraintException;->RemoteActionCompatParcelizer(Landroid/content/Context;
+                    Ljava/io/InputStream;)Landroid/graphics/Typeface; (0x34) ---> Ljava/io/File;->delete()Z
+               => Lx/ConstraintReference$IncorrectConstraintException;->RemoteActionCompatParcelizer(Landroid/content/Context;
+                    Ljava/io/InputStream;)Landroid/graphics/Typeface; (0x3e) ---> Ljava/io/File;->delete()Z
+               => Lx/ConstraintReference$IncorrectConstraintException;->RemoteActionCompatParcelizer(Landroid/content/Context;
+                    Ljava/io/InputStream;)Landroid/graphics/Typeface; (0x46) ---> Ljava/io/File;->delete()Z
+               => Lx/ConstraintReference$IncorrectConstraintException;->valueOf(Landroid/content/Context; Landroid/content/res/Resources; I
+                    Ljava/lang/String; I)Landroid/graphics/Typeface; (0x1c) ---> Ljava/io/File;->delete()Z
+               => Lx/ConstraintReference$IncorrectConstraintException;->valueOf(Landroid/content/Context; Landroid/content/res/Resources; I
+                    Ljava/lang/String; I)Landroid/graphics/Typeface; (0x34) ---> Ljava/io/File;->delete()Z
+               => Lx/ConstraintReference$IncorrectConstraintException;->valueOf(Landroid/content/Context; Landroid/content/res/Resources; I
+                    Ljava/lang/String; I)Landroid/graphics/Typeface; (0x3e) ---> Ljava/io/File;->delete()Z
+               => Lx/ConstraintReference$IncorrectConstraintException;->valueOf(Landroid/content/Context; Landroid/content/res/Resources; I
+                    Ljava/lang/String; I)Landroid/graphics/Typeface; (0x46) ---> Ljava/io/File;->delete()Z
+               => Lx/PopupLayout$canCalculatePosition$2;->delete(Landroid/net/Uri; Ljava/lang/String; [Ljava/lang/String;)I (0x32) --->
+                    Ljava/io/File;->delete()Z
+               => Lx/PopupLayout$canCalculatePosition$2;->delete(Landroid/net/Uri; Ljava/lang/String; [Ljava/lang/String;)I (0x56) --->
+                    Ljava/io/File;->delete()Z
+               => Lx/WidgetRun$RunType;->onErrorResponse(Landroid/content/Context; Landroid/content/res/Resources; I)Ljava/nio/ByteBuffer;
+                    (0x1c) ---> Ljava/io/File;->delete()Z
+               => Lx/WidgetRun$RunType;->onErrorResponse(Landroid/content/Context; Landroid/content/res/Resources; I)Ljava/nio/ByteBuffer;
+                    (0x2c) ---> Ljava/io/File;->delete()Z
+               => Lx/WidgetRun$RunType;->onErrorResponse(Landroid/content/Context; Landroid/content/res/Resources; I)Ljava/nio/ByteBuffer;
+                    (0x36) ---> Ljava/io/File;->delete()Z
+               => Lx/getMinimumMaxLifecycleState;->MFServerResponse$RDA$RDANominee()V (0x1c2) ---> Ljava/io/File;->delete()Z
+               => Lx/getMinimumMaxLifecycleState;->MFServerResponse$RDA$RDANominee()V (0x33e) ---> Ljava/io/File;->delete()Z
+               => Lx/getSharedElementReturnTransition;->setShortcut(Landroid/content/Context;)V (0xf8) ---> Ljava/io/File;->delete()Z
+               => Lx/getSharedElementReturnTransition;->setShortcut(Landroid/content/Context;)V (0x16c) ---> Ljava/io/File;->delete()Z
+               => Lx/onActivityDestroyed;->MediaBrowserCompat$SearchResultReceiver(Ljava/io/File;)Z (0x24) ---> Ljava/io/File;->delete()Z
+               => Lx/access$getRegular$p;->TextFieldSizeKt$textFieldMinSize$1(I)V (0x8e) ---> Ljava/io/File;->delete()Z
+               => Lx/access$getRegular$p;->clear()V (0x20) ---> Ljava/io/File;->delete()Z
+               => Lx/access$getRegular$p;->e$a(Ljava/lang/String; Lx/RepeatOnLifecycleKt$repeatOnLifecycle$3$1$1$1$onErrorResponse;)V (0x88)
+                    ---> Ljava/io/File;->delete()Z
+               => Lx/access$getRegular$p;->initialize()V (0xb2) ---> Ljava/io/File;->delete()Z
+               => Lx/access$getRegular$p;->remove(Ljava/lang/String;)V (0xa) ---> Ljava/io/File;->delete()Z
+               => Lx/setVerticalBias;->valueOf(Landroid/content/Context; Lx/setFirstVerticalBias$e$a; Landroid/content/res/Resources;
+                    I)Landroid/graphics/Typeface; (0x64) ---> Ljava/io/File;->delete()Z
+               => Lx/setVerticalBias;->valueOf(Landroid/content/Context; Lx/setFirstVerticalBias$e$a; Landroid/content/res/Resources;
+                    I)Landroid/graphics/Typeface; (0xc8) ---> Ljava/io/File;->delete()Z
+               => Lx/setVerticalBias;->valueOf(Landroid/content/Context; Lx/setFirstVerticalBias$e$a; Landroid/content/res/Resources;
+                    I)Landroid/graphics/Typeface; (0xd0) ---> Ljava/io/File;->delete()Z
+               => Lx/setVerticalBias;->valueOf(Landroid/content/Context; Lx/setFirstVerticalBias$e$a; Landroid/content/res/Resources;
+                    I)Landroid/graphics/Typeface; (0xde) ---> Ljava/io/File;->delete()Z
+               => Lx/setVerticalBias;->valueOf(Landroid/content/Context; Lx/setFirstVerticalBias$e$a; Landroid/content/res/Resources;
+                    I)Landroid/graphics/Typeface; (0x100) ---> Ljava/io/File;->delete()Z
+               => Lx/setVerticalBias;->valueOf(Landroid/content/Context; Lx/setFirstVerticalBias$e$a; Landroid/content/res/Resources;
+                    I)Landroid/graphics/Typeface; (0x108) ---> Ljava/io/File;->delete()Z
+               => Lcom/base/bankalfalah/openalfa/accountopening/views/MergedSelfieActivity;->valueOf(Landroid/graphics/Bitmap;
+                    Lcom/base/bankalfalah/scanner/model/CnicData; Z)V (0x280) ---> Ljava/io/File;->delete()Z
+               => Lcom/base/bankalfalah/openalfa/accountopening/views/PaymentAccountOpeningRejectionActivity;->valueOf(Landroid/graphics/Bit
+                    map; Lcom/base/bankalfalah/scanner/model/CnicData; Z)V (0x1c6) ---> Ljava/io/File;->delete()Z
+               => Lcom/base/bankalfalah/openalfa/biometric/activity/CnicSanActivity;->valueOf(Landroid/graphics/Bitmap;
+                    Lcom/base/bankalfalah/scanner/model/CnicData; Z)V (0x206) ---> Ljava/io/File;->delete()Z
+[Notice] <Signature><Hacker> Getting Signature Code Checking:
+           This app has code checking the package signature in the code. It might be used to check for whether the app is hacked by the
+           attackers.
+               => Lcom/adjust/sdk/a;->d(Landroid/content/Context;)Ljava/lang/String; (0x16) --->
+                    Landroid/content/pm/PackageManager;->getPackageInfo(Ljava/lang/String; I)Landroid/content/pm/PackageInfo;
+               => Lx/setGuidelineEnd;->values(Landroid/content/pm/PackageManager; Lx/getEmptyVisibility;
+                    Landroid/content/res/Resources;)Landroid/content/pm/ProviderInfo; (0x36) --->
+                    Landroid/content/pm/PackageManager;->getPackageInfo(Ljava/lang/String; I)Landroid/content/pm/PackageInfo;
+[Notice]  AndroidManifest Exported Components Checking 2:
+           Found "exported" components(except for Launcher) for receiving Google's "Android" actions (AndroidManifest.xml):
+                 activity => com.base.bankalfalah.openalfa.nfc.CardManagementNfcActivity
+                 activity => com.base.bankalfalah.openalfa.nfc.NfcActivity
+                 activity => com.base.bankalfalah.openalfa.nfc.NfcPaymentActivity
+[Info]  AndroidManifest Adb Backup Checking:
+           This app has disabled Adb Backup.
+[Info] <Command> Runtime Command Checking:
+           This app is not using critical function 'Runtime.getRuntime().exec("...")'.
+[Info] <Command> Executing "root" or System Privilege Checking:
+           Did not find codes checking "root" permission(su) or getting system permission (It's still possible we did not find out).
+[Info] <Database> SQLiteDatabase Transaction Deprecated Checking:
+           Ignore checking "SQLiteDatabase:beginTransactionNonExclusive" because your set minSdk >= 11.
+[Info] <Database> Android SQLite Databases Encryption (SQLite Encryption Extension (SEE)):
+           This app is "NOT" using SQLite Encryption Extension (SEE) on Android (http://www.sqlite.org/android) to encrypt or decrpyt
+           databases.
+[Info] <Database> Android SQLite Databases Encryption (SQLCipher):
+           This app is "NOT" using SQLCipher(http://sqlcipher.net/) to encrypt or decrpyt databases.
+[Info] <Debug> Android Debug Mode Checking:
+           DEBUG mode is OFF(android:debuggable="false") in AndroidManifest.xml.
+[Info]  Dynamic Code Loading:
+           No dynamic code loading(DexClassLoader) found.
+[Info] <#BID 64208, CVE-2013-6271#> Fragment Vulnerability Checking:
+           Did not detect the vulnerability of "Fragment" dynamically loading into "PreferenceActivity" or "SherlockPreferenceActivity"
+[Info] <Framework> Framework - MonoDroid:
+           This app is NOT using MonoDroid Framework (http://xamarin.com/android).
+[Info] <Database><Hacker> Key for Android SQLite Databases Encryption:
+           Did not find using the symmetric key(PRAGMA key) to encrypt the SQLite databases (It's still possible that it might use but we
+           did not find out).
+[Info] <Debug><Hacker> Codes for Checking Android Debug Mode:
+           Did not detect codes for checking "ApplicationInfo.FLAG_DEBUGGABLE" in AndroidManifest.xml.
+[Info] <Hacker> APK Installing Source Checking:
+           Did not detect this app checks for APK installer sources.
+[Info] <KeyStore><Hacker> KeyStore File Location:
+           Did not find any possible BKS keystores or certificate keystore file (Notice: It does not mean this app does not use keysotre):
+[Info] <KeyStore><Hacker> KeyStore Protection Checking:
+           Ignore checking KeyStore protected by password or not because you're not using KeyStore.
+[Info] <Hacker> Code Setting Preventing Screenshot Capturing:
+           Did not detect this app has code setting preventing screenshot capturing.
+[Info]  HttpURLConnection Android Bug Checking:
+           Ignore checking "http.keepAlive" because you're not using "HttpURLConnection" and min_Sdk > 8.
+[Info] <KeyStore> KeyStore Type Checking:
+           KeyStore 'BKS' type check OK
+[Info]  Google Cloud Messaging Suggestion:
+           Nothing to suggest.
+[Info] <#CVE-2013-4787#> Master Key Type I Vulnerability:
+           No Master Key Type I Vulnerability in this APK.
+[Info]  Native Library Loading Checking:
+           No native library loaded.
+[Info]  AndroidManifest Dangerous ProtectionLevel of Permission Checking:
+           No "dangerous" protection level customized permission found (AndroidManifest.xml).
+[Info]  AndroidManifest PermissionGroup Checking:
+           PermissionGroup in permission tag of AndroidManifest sets correctly.
+[Info]  AndroidManifest "intent-filter" Settings Checking:
+           "intent-filter" of AndroidManifest.xml check OK.
+[Info]  AndroidManifest Normal ProtectionLevel of Permission Checking:
+           No default or "normal" protection level customized permission found (AndroidManifest.xml).
+[Info] <#CVE-2013-6272#> AndroidManifest Exported Lost Prefix Checking:
+           No exported components that forgot to add "android:" prefix.
+[Info]  AndroidManifest ContentProvider Exported Checking:
+           No exported "ContentProvider" found (AndroidManifest.xml).
+[Info] <Sensitive_Information> Getting IMEI and Device ID:
+           Did not detect this app is getting the "device id(IMEI)" by "TelephonyManager.getDeviceId()" approach.
+[Info]  Codes for Sending SMS:
+           Did not detect this app has code for sending SMS messages (sendDataMessage, sendMultipartTextMessage or sendTextMessage).
+[Info] <System> AndroidManifest sharedUserId Checking:
+           This app does not use "android.uid.system" sharedUserId.
+[Info] <SSL_Security> SSL Implementation Checking (Verifying Host Name in Fields):
+           Critical vulnerability "ALLOW_ALL_HOSTNAME_VERIFIER" field setting or "AllowAllHostnameVerifier" class instance not found.
+[Info] <SSL_Security> SSL Implementation Checking (Insecure component):
+           Did not detect SSLSocketFactory by insecure method "getInsecure".
+[Info] <SSL_Security> SSL Implementation Checking (HttpHost):
+           DEFAULT_SCHEME_NAME for HttpHost check: OK
+[Info] <SSL_Security> SSL Connection Checking:
+           Did not discover urls that are not under SSL (Notice: if you encrypt the url string, we can not discover that).
+[Info] <SSL_Security> SSL Implementation Checking (WebViewClient for WebView):
+           Did not detect critical usage of "WebViewClient"(MITM Vulnerability).
+[Info]  Unnecessary Permission Checking:
+           Permission 'android.permission.ACCESS_MOCK_LOCATION' sets correctly.
+[Info]  Accessing the Internet Checking:
+           This app is using the Internet via HTTP protocol.
+[Info]  AndroidManifest System Use Permission Checking:
+           No system-level critical use-permission found.
+[Info] <WebView><Remote Code Execution><#CVE-2013-4710#> WebView RCE Vulnerability Checking:
+           WebView addJavascriptInterface vulnerabilities not found.
+------------------------------------------------------------
+AndroBugs analyzing time: 30.658 secs
+Total elapsed time: 100.25 secs
