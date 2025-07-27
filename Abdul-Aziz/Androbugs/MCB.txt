@@ -1,0 +1,237 @@
+*************************************************************************
+**   AndroBugs Framework - Android App Security Vulnerability Scanner  **
+**                            version: 1.0.0                           **
+**     author: Yu-Cheng Lin (@AndroBugs, http://www.AndroBugs.com)     **
+**               contact: androbugs.framework@gmail.com                **
+*************************************************************************
+Platform: Android
+Package Name: com.mcb.mcblive
+Package Version Name: 2.20.800215
+Package Version Code: 800215
+Min Sdk: 23
+Target Sdk: 34
+MD5   : 25ce4d505e1679857df60346e4851f42
+SHA1  : 66e6f9e47b432478943270fcb1d7dd0c95e806bd
+SHA256: 37cf41fd816945d84917d8776b3751feeb964fec3269ff3221f41164105e9069
+SHA512: 2ba8dd3d769e85b713849c24f6e0e3a95b6e5e81a59cb79ffa18d56315745fde50165db41fa444ad1ef14b41c8af0b70640b60423ea7a1a09965ba88eb4ab9ae
+Analyze Signature: 8850139d580861864389ad8839c36495a6ce8dee6bc87759a2ccfb8cddd1c4bbad9001494750a28f0538ae30a3b3e63dd1e5aae183ec1d25b9c1c5029e56a006
+------------------------------------------------------------------------------------------------
+[Critical] <#BID 64208, CVE-2013-6271#> Fragment Vulnerability Checking:
+           'Fragment' or 'Fragment for ActionbarSherlock' has a severe vulnerability prior to Android 4.4 (API 19).
+           Please check:
+           (1)http://developer.android.com/reference/android/os/Build.VERSION_CODES.html#KITKAT
+           (2)http://developer.android.com/reference/android/preference/PreferenceActivity.html#isValidFragment(java.lang.String)
+           (3)http://stackoverflow.com/questions/19973034/isvalidfragment-android-api-19
+           (4)http://securityintelligence.com/new-vulnerability-android-framework-fragment-injection/
+           (5)http://securityintelligence.com/wp-content/uploads/2013/12/android-collapses-into-fragments.pdf
+           (6)https://cureblog.de/2013/11/cve-2013-6271-remove-device-locks-from-android-phone/
+               You MUST override 'isValidFragment' method in every "PreferenceActivity" class to avoid Exception throwing in Android 4.4:
+                   Lcom/facebook/react/devsupport/DevSettingsActivity;
+               All of the potential vulnerable "fragment":
+                   Landroidx/lifecycle/ReportFragment;
+                   Lcom/bumptech/glide/manager/RequestManagerFragment;
+[Critical] <SSL_Security> SSL Connection Checking:
+           URLs that are NOT under SSL (Total:2):
+               http://ns.adobe.com/xap/1.0/ 
+                   => Lcom/drew/metadata/xmp/XmpReader;->readJpegSegments(Ljava/lang/Iterable; Lcom/drew/metadata/Metadata;
+                    Lcom/drew/imaging/jpeg/JpegSegmentType;)V
+                   => Landroidx/exifinterface/media/ExifInterface;-><clinit>()V
+               http://ns.adobe.com/xmp/extension/ 
+                   => Lcom/drew/metadata/xmp/XmpReader;->readJpegSegments(Ljava/lang/Iterable; Lcom/drew/metadata/Metadata;
+                    Lcom/drew/imaging/jpeg/JpegSegmentType;)V
+[Critical] <WebView><Remote Code Execution><#CVE-2013-4710#> WebView RCE Vulnerability Checking:
+           Found a critical WebView "addJavascriptInterface" vulnerability. This method can be used to allow JavaScript to control the host
+           application.
+           This is a powerful feature, but also presents a security risk for applications targeted to API level JELLY_BEAN(4.2) or below,
+           because JavaScript could use reflection to access an injected object's public fields. Use of this method in a WebView containing
+           untrusted content could allow an attacker to manipulate the host application in unintended ways, executing Java code with the
+           permissions of the host application.
+           Reference:
+             1."http://developer.android.com/reference/android/webkit/WebView.html#addJavascriptInterface(java.lang.Object,
+           java.lang.String) "
+             2.https://labs.mwrinfosecurity.com/blog/2013/09/24/webview-addjavascriptinterface-remote-code-execution/
+             3.http://50.56.33.56/blog/?p=314
+             4.http://blog.trustlook.com/2013/09/04/alert-android-webview-addjavascriptinterface-code-execution-vulnerability/
+           Please modify the below code:
+               => Lcom/facebook/appevents/AppEventsLoggerImpl$Companion;->augmentWebView(Landroid/webkit/WebView;
+                    Landroid/content/Context;)V (0xf0) ---> Landroid/webkit/WebView;->addJavascriptInterface(Ljava/lang/Object;
+                    Ljava/lang/String;)V
+[Warning]  External Storage Accessing:
+           External storage access found (Remember DO NOT write important files to external storages):
+               => Landroidx/core/content/FileProvider;->parsePathStrategy(Landroid/content/Context;
+                    Ljava/lang/String;)Landroidx/core/content/FileProvider$PathStrategy; (0xd0) --->
+                    Landroid/os/Environment;->getExternalStorageDirectory()Ljava/io/File;
+               => Lcom/facebook/cache/disk/DefaultDiskStorage;->isExternal(Ljava/io/File; Lcom/facebook/cache/common/CacheErrorLogger;)Z
+                    (0x10) ---> Landroid/os/Environment;->getExternalStorageDirectory()Ljava/io/File;
+               => Lcom/facebook/common/statfs/StatFsHelper;->ensureInitialized()V (0x26) --->
+                    Landroid/os/Environment;->getExternalStorageDirectory()Ljava/io/File;
+               => Lcom/facebook/internal/Utility;->refreshAvailableExternalStorage()V (0xc) --->
+                    Landroid/os/Environment;->getExternalStorageDirectory()Ljava/io/File;
+               => Lcom/facebook/internal/Utility;->refreshTotalExternalStorage()V (0xc) --->
+                    Landroid/os/Environment;->getExternalStorageDirectory()Ljava/io/File;
+[Warning]  AndroidManifest Exported Components Checking:
+           Found "exported" components(except for Launcher) for receiving outside applications' actions (AndroidManifest.xml).
+           These components can be initilized by other apps. You should add or modify the attribute to [exported="false"] if you don't want
+           to.
+           You can also protect it with a customized permission with "signature" or higher protectionLevel and specify in
+           "android:permission" attribute.
+                 receiver => com.ofss.digx.mobile.android.MainActivity$SMSListener
+[Warning] <Sensitive_Information> Getting IMEI and Device ID:
+           This app has code getting the "device id(IMEI)" but there are problems with this "TelephonyManager.getDeviceId()" approach.
+           1.Non-phones: Wifi-only devices or music players that don't have telephony hardware just don't have this kind of unique
+           identifier.
+           2.Persistence: On devices which do have this, it persists across device data wipes and factory resets. It's not clear at all if,
+           in this situation, your app should regard this as the same device.
+           3.Privilege:It requires READ_PHONE_STATE permission, which is irritating if you don't otherwise use or need telephony.
+           4.Bugs: We have seen a few instances of production phones for which the implementation is buggy and returns garbage, for example
+           zeros or asterisks.
+           If you want to get an unique id for the device, we suggest you use "Installation" framework in the following article.
+           Please check the reference: http://android-developers.blogspot.tw/2011/03/identifying-app-installations.html
+               => Landroidx/core/telephony/TelephonyManagerCompat;->getImei(Landroid/telephony/TelephonyManager;)Ljava/lang/String; (0x40)
+                    ---> Landroid/telephony/TelephonyManager;->getDeviceId()Ljava/lang/String;
+[Warning] <WebView> WebView Local File Access Attacks Checking:
+           Found "setAllowFileAccess(true)" or not set(enabled by default) in WebView. The attackers could inject malicious script into
+           WebView and exploit the opportunity to access local resources. This can be mitigated or prevented by disabling local file system
+           access. (It is enabled by default)
+           Note that this enables or disables file system access only. Assets and resources are still accessible using file:///android_asset
+           and file:///android_res.
+           The attackers can use "mWebView.loadUrl("file:///data/data/[Your_Package_Name]/[File]");" to access app's local file.
+           Reference: (1)https://labs.mwrinfosecurity.com/blog/2012/04/23/adventures-with-android-webviews/
+                      (2)http://developer.android.com/reference/android/webkit/WebSettings.html#setAllowFileAccess(boolean)
+           Please add or modify "yourWebView.getSettings().setAllowFileAccess(false)" to your WebView:
+               Landroidx/webkit/WebSettingsCompat;->getDisabledActionModeMenuItems(Landroid/webkit/WebSettings;)I
+               Landroidx/webkit/WebSettingsCompat;->getForceDark(Landroid/webkit/WebSettings;)I
+               Landroidx/webkit/WebSettingsCompat;->getOffscreenPreRaster(Landroid/webkit/WebSettings;)Z
+               Landroidx/webkit/WebSettingsCompat;->getSafeBrowsingEnabled(Landroid/webkit/WebSettings;)Z
+               Landroidx/webkit/WebSettingsCompat;->setDisabledActionModeMenuItems(Landroid/webkit/WebSettings; I)V
+               Landroidx/webkit/WebSettingsCompat;->setForceDark(Landroid/webkit/WebSettings; I)V
+               Landroidx/webkit/WebSettingsCompat;->setOffscreenPreRaster(Landroid/webkit/WebSettings; Z)V
+               Landroidx/webkit/WebSettingsCompat;->setSafeBrowsingEnabled(Landroid/webkit/WebSettings; Z)V
+               Lcom/facebook/internal/WebDialog;->setUpWebView(I)V
+[Warning] <WebView> WebView Potential XSS Attacks Checking:
+           Found "setJavaScriptEnabled(true)" in WebView, which could exposed to potential XSS attacks. Please check the web page code
+           carefully and sanitize the output:
+               => Lcom/facebook/internal/WebDialog;->setUpWebView(I)V (0x8a) ---> Landroid/webkit/WebSettings;->setJavaScriptEnabled(Z)V
+[Notice] <Database><#CVE-2011-3901#> Android SQLite Databases Vulnerability Checking:
+           This app is using Android SQLite databases but it's "NOT" suffering from SQLite Journal Information Disclosure Vulnerability.
+[Notice]  File Unsafe Delete Checking:
+           Everything you delete may be recovered by any user or attacker, especially rooted devices.
+           Please make sure do not use "file.delete()" to delete essential files.
+           Check this video: https://www.youtube.com/watch?v=tGw1fxUD-uY
+               => Landroidx/browser/browseractions/BrowserServiceFileProvider$FileCleanupTask;->doInBackground([Ljava/lang/Void;)Ljava/lang/
+                    Void; (0xbe) ---> Ljava/io/File;->delete()Z
+               => Landroidx/core/content/FileProvider;->delete(Landroid/net/Uri; Ljava/lang/String; [Ljava/lang/String;)I (0xc) --->
+                    Ljava/io/File;->delete()Z
+               => Landroidx/core/graphics/TypefaceCompatBaseImpl;->createFromInputStream(Landroid/content/Context;
+                    Ljava/io/InputStream;)Landroid/graphics/Typeface; (0x1c) ---> Ljava/io/File;->delete()Z
+               => Landroidx/core/graphics/TypefaceCompatBaseImpl;->createFromInputStream(Landroid/content/Context;
+                    Ljava/io/InputStream;)Landroid/graphics/Typeface; (0x34) ---> Ljava/io/File;->delete()Z
+               => Landroidx/core/graphics/TypefaceCompatBaseImpl;->createFromInputStream(Landroid/content/Context;
+                    Ljava/io/InputStream;)Landroid/graphics/Typeface; (0x3e) ---> Ljava/io/File;->delete()Z
+               => Landroidx/core/graphics/TypefaceCompatBaseImpl;->createFromInputStream(Landroid/content/Context;
+                    Ljava/io/InputStream;)Landroid/graphics/Typeface; (0x46) ---> Ljava/io/File;->delete()Z
+               => Landroidx/core/graphics/TypefaceCompatBaseImpl;->createFromResourcesFontFile(Landroid/content/Context;
+                    Landroid/content/res/Resources; I Ljava/lang/String; I)Landroid/graphics/Typeface; (0x1c) ---> Ljava/io/File;->delete()Z
+                              => Lcom/facebook/react/devsupport/JSCHeapCapture;->captureHeap(Ljava/lang/String;
+                    Lcom/facebook/react/devsupport/JSCHeapCapture$CaptureCallback;)V (0x62) ---> Ljava/io/File;->delete()Z
+[Notice] <Hacker> APK Installing Source Checking:
+           This app has code checking APK installer sources(e.g. from Google Play, from Amazon, etc.). It might be used to check for whether
+           the app is hacked by the attackers.
+               => Lcom/facebook/internal/AttributionIdentifiers$Companion;->getInstallerPackageName(Landroid/content/Context;)Ljava/lang/Str
+                    ing; (0x14) ---> Landroid/content/pm/PackageManager;->getInstallerPackageName(Ljava/lang/String;)Ljava/lang/String;
+[Notice] <KeyStore><Hacker> Possible KeyStore File Location:
+           BKS possible keystore file:
+               assets/www/components/business-components/accounts/interest-certificate/hooks.js
+               assets/www/components/business-components/accounts/interest-certificate/interest-certificate.css
+               assets/www/components/business-components/accounts/interest-certificate/interest-certificate.html
+               assets/www/components/business-components/accounts/interest-certificate/interest-certificate.js
+               assets/www/components/business-components/accounts/interest-certificate/interest-certificate.json
+               assets/www/components/business-components/accounts/interest-certificate/loader.js
+               assets/www/components/business-components/accounts/interest-certificate/model.js
+               assets/www/components/compliance/entity-certification/loader.js
+               assets/www/components/interest-certificates/balance-certificate/loader.js
+               assets/www/components/interest-certificates/interest-certificate-casa/loader.js
+               assets/www/components/interest-certificates/interest-certificate-loans/loader.js
+               assets/www/components/interest-certificates/interest-certificate-td/loader.js
+               assets/www/extensions/components/business-components/accounts/interest-certificate/hooks.js
+               assets/www/extensions/components/business-components/accounts/interest-certificate/interest-certificate.css
+               assets/www/extensions/components/business-components/accounts/interest-certificate/interest-certificate.html
+               assets/www/extensions/components/business-components/accounts/interest-certificate/interest-certificate.js
+               assets/www/extensions/components/business-components/accounts/interest-certificate/interest-certificate.json
+               assets/www/extensions/components/business-components/accounts/interest-certificate/loader.js
+               assets/www/extensions/components/business-components/accounts/interest-certificate/model.js
+               assets/www/extensions/components/certificates/account-maintenance-certificate/loader.js
+               assets/www/extensions/components/interest-certificates/balance-certificate/loader.js
+               assets/www/extensions/partials/help/ar/balance-certificate.html
+               assets/www/extensions/partials/help/ar/interest-certificate.html
+               assets/www/extensions/partials/help/balance-certificate.html
+               assets/www/extensions/partials/help/interest-certificate.html
+               assets/www/extensions/partials/help/ur/balance-certificate.html
+               assets/www/extensions/partials/help/ur/interest-certificate.html
+               assets/www/extensions/resources/nls/account-maintenance-certificate.js
+               assets/www/extensions/resources/nls/ar/balance-certificate.js
+               assets/www/extensions/resources/nls/ar/complaints-certificates.js
+               assets/www/extensions/resources/nls/ar/entity-certification.js
+               assets/www/extensions/resources/nls/ar/interest-certificate-casa.js
+               assets/www/extensions/resources/nls/ar/interest-certificate-loans.js
+               assets/www/extensions/resources/nls/ar/interest-certificate-td.js
+               assets/www/extensions/resources/nls/ar/interest-certificate.js
+               assets/www/extensions/resources/nls/balance-certificate.js
+               assets/www/extensions/resources/nls/complaints-certificates.js
+               assets/www/extensions/resources/nls/ur/account-maintenance-certificate.js
+               assets/www/extensions/resources/nls/ur/balance-certificate.js
+               assets/www/extensions/resources/nls/ur/complaints-certificates.js
+               assets/www/images/dashboard/complaints-certificates/Widget-Icons-01.svg
+               assets/www/images/dashboard/complaints-certificates/Widget-Icons-02.svg
+               assets/www/images/dashboard/complaints-certificates/Widget-Icons-03.svg
+               assets/www/partials/help/ar/interest-certificate.html
+               assets/www/partials/help/interest-certificate.html
+               assets/www/partials/interest-certificate/interest-certificate.html
+               assets/www/resources/nls/ar/balance-certificate.js
+               assets/www/resources/nls/ar/entity-certification.js
+               assets/www/resources/nls/ar/interest-certificate-casa.js
+               assets/www/resources/nls/ar/interest-certificate-loans.js
+               assets/www/resources/nls/ar/interest-certificate-td.js
+               assets/www/resources/nls/ar/interest-certificate.js
+               assets/www/resources/nls/balance-certificate.js
+               assets/www/resources/nls/entity-certification.js
+               assets/www/resources/nls/interest-certificate-casa.js
+               assets/www/resources/nls/interest-certificate-loans.js
+               assets/www/resources/nls/interest-certificate-td.js
+               assets/www/resources/nls/interest-certificate.js
+               stamp-cert-sha256
+[Notice] <Signature><Hacker> Getting Signature Code Checking:
+           This app has code checking the package signature in the code. It might be used to check for whether the app is hacked by the
+           attackers.
+               => Landroidx/browser/trusted/PackageIdentityUtils$Pre28Implementation;->getFingerprintsForPackage(Ljava/lang/String;
+                    Landroid/content/pm/PackageManager;)Ljava/util/List; (0x4) --->
+                    Landroid/content/pm/PackageManager;->getPackageInfo(Ljava/lang/String; I)Landroid/content/pm/PackageInfo;
+               => Landroidx/core/content/pm/PackageInfoCompat;->getSignatures(Landroid/content/pm/PackageManager;
+                    Ljava/lang/String;)Ljava/util/List; (0x40) ---> Landroid/content/pm/PackageManager;->getPackageInfo(Ljava/lang/String;
+                    I)Landroid/content/pm/PackageInfo;
+               => Landroidx/core/provider/FontProvider;->getProvider(Landroid/content/pm/PackageManager;
+                    Landroidx/core/provider/FontRequest; Landroid/content/res/Resources;)Landroid/content/pm/ProviderInfo; (0x36) --->
+                    Landroid/content/pm/PackageManager;->getPackageInfo(Ljava/lang/String; I)Landroid/content/pm/PackageInfo;
+               => Landroidx/emoji2/text/DefaultEmojiCompatConfig$DefaultEmojiCompatConfigHelper;->getSigningSignatures(Landroid/content/pm/P
+                    ackageManager; Ljava/lang/String;)[Landroid/content/pm/Signature; (0x4) --->
+                    Landroid/content/pm/PackageManager;->getPackageInfo(Ljava/lang/String; I)Landroid/content/pm/PackageInfo;
+               => Landroidx/emoji2/text/DefaultEmojiCompatConfig$DefaultEmojiCompatConfigHelper_API28;->getSigningSignatures(Landroid/conten
+                    t/pm/PackageManager; Ljava/lang/String;)[Landroid/content/pm/Signature; (0x4) --->
+                    Landroid/content/pm/PackageManager;->getPackageInfo(Ljava/lang/String; I)Landroid/content/pm/PackageInfo;
+               => Lcom/facebook/FacebookSdk;->getApplicationSignature(Landroid/content/Context;)Ljava/lang/String; (0x38) --->
+                    Landroid/content/pm/PackageManager;->getPackageInfo(Ljava/lang/String; I)Landroid/content/pm/PackageInfo;
+               => Lcom/facebook/internal/FacebookSignatureValidator;->validateSignature(Landroid/content/Context; Ljava/lang/String;)Z
+                    (0x92) ---> Landroid/content/pm/PackageManager;->getPackageInfo(Ljava/lang/String; I)Landroid/content/pm/PackageInfo;
+               => Lcom/facebook/internal/security/CertificateUtil;->getCertificateHash(Landroid/content/Context;)Ljava/lang/String; (0x28)
+                    ---> Landroid/content/pm/PackageManager;->getPackageInfo(Ljava/lang/String; I)Landroid/content/pm/PackageInfo;
+[Notice]  AndroidManifest Exported Components Checking 2:
+           Found "exported" components(except for Launcher) for receiving Google's "Android" actions (AndroidManifest.xml):
+                 activity => com.tlx.custom.plugins.covalent.FaceoffDemoBaseActivity
+                 activity => com.facebook.CustomTabActivity
+                 activity => com.google.firebase.auth.internal.GenericIdpActivity
+                 activity => com.google.firebase.auth.internal.RecaptchaActivity
+                  service => com.google.android.play.core.assetpacks.AssetPackExtractionService
+                 receiver => com.learnium.RNDeviceInfo.RNDeviceReceiver
+------------------------------------------------------------
+AndroBugs analyzing time: 7.525 secs
+Total elapsed time: 52.545 secs

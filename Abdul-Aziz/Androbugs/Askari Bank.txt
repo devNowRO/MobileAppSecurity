@@ -1,0 +1,352 @@
+*************************************************************************
+**   AndroBugs Framework - Android App Security Vulnerability Scanner  **
+**                            version: 1.0.0                           **
+**     author: Yu-Cheng Lin (@AndroBugs, http://www.AndroBugs.com)     **
+**               contact: androbugs.framework@gmail.com                **
+*************************************************************************
+Platform: Android
+Package Name: com.askari
+Package Version Name: 2.1.18
+Package Version Code: 84
+Min Sdk: 22
+Target Sdk: 34
+MD5   : ed8b5c5f6f22ac835df3f688bdef99b0
+SHA1  : f3a1ccbfbdd92df5321962d8bda8c752459bc10d
+SHA256: 6823c4b1d4ffad267353bab5d1541dc6a3ea53bc3aaf1dbd74eec27f8951176e
+SHA512: e2debc0382fff72bf29ef736088c9d9519667c80a7c89b5b3631a9dded971337448beffb9c5c9970aefc0da9abaa2c7585e983b1ae641cea8b245b8962b54051
+Analyze Signature: 8c356d0230986b602968dc13bd12105a5662369c34787f01458ae4f1c379aa18243863e736c78d64fc5d14177ae18df59b8e779971decb5d5d2c3a8451259c5a
+------------------------------------------------------------------------------------------------
+[Critical]  App Sandbox Permission Checking:
+           Security issues "MODE_WORLD_READABLE" or "MODE_WORLD_WRITEABLE" found (Please check:
+           https://www.owasp.org/index.php/Mobile_Top_10_2014-M2):
+               [getSharedPreferences]
+               => Lo/getTc;->CipherOutputStream([Ljava/lang/Object;)Ljava/lang/Object; (0x46) --->
+                    Landroid/content/Context;->getSharedPreferences(Ljava/lang/String; I)Landroid/content/SharedPreferences;
+               => Lo/getTc;->GOST28147Mappings([Ljava/lang/Object;)Ljava/lang/Object; (0x3c) --->
+                    Landroid/content/Context;->getSharedPreferences(Ljava/lang/String; I)Landroid/content/SharedPreferences;
+               => Lo/getTc;->JCERSAPublicKey([Ljava/lang/Object;)Ljava/lang/Object; (0x36) --->
+                    Landroid/content/Context;->getSharedPreferences(Ljava/lang/String; I)Landroid/content/SharedPreferences;
+               --------------------------------------------------
+[Critical] <Implicit_Intent> Implicit Service Checking:
+           To ensure your app is secure, always use an explicit intent when starting a Service and DO NOT declare intent filters for your
+           services. Using an implicit intent to start a service is a security hazard because you cannot be certain what service will
+           respond to the intent, and the user cannot see which service starts.
+           Reference: http://developer.android.com/guide/components/intents-filters.html#Types
+               => com.avanzasolutions.apps_sdk.service.APPSFirebaseMessagingService
+[Critical] <SSL_Security> SSL Connection Checking:
+           URLs that are NOT under SSL (Total:66):
+               http://%s/%s
+                   => Lcom/facebook/react/devsupport/DevServerHelper;->createResourceURL(Ljava/lang/String;
+                    Ljava/lang/String;)Ljava/lang/String;
+               http://%s/%s.%s?platform=android&dev=%s&minify=%s&app=%s&modulesOnly=%s&runModule=%s%s
+                   => Lcom/facebook/react/devsupport/DevServerHelper;->createBundleURL(Ljava/lang/String;
+                    Lcom/facebook/react/devsupport/DevServerHelper$BundleType; Ljava/lang/String; Z Z)Ljava/lang/String;
+               http://%s/inspector/device?name=%s&app=%s
+                   => Lcom/facebook/react/devsupport/DevServerHelper;->getInspectorDeviceUrl()Ljava/lang/String;
+               http://%s/launch-js-devtools
+                   => Lcom/facebook/react/devsupport/DevServerHelper;->createLaunchJSDevtoolsCommandUrl()Ljava/lang/String;
+               http://%s/open-stack-frame
+                   => Lcom/facebook/react/devsupport/DevServerHelper;->createOpenStackFrameURL(Ljava/lang/String;)Ljava/lang/String;
+               http://%s/open-url
+                   => Lcom/facebook/react/devsupport/DevServerHelper;->getOpenUrlEndpoint(Landroid/content/Context;)Ljava/lang/String;
+               http://%s/symbolicate
+                   => Lcom/facebook/react/devsupport/DevServerHelper;->createSymbolicateURL(Ljava/lang/String;)Ljava/lang/String;
+               http://cipa.jp/exif/1.0/
+                   => Lo/xorPad;-><init>()V
+               http://iptc.org/std/Iptc4xmpCore/1.0/xmlns/
+                   => Lo/xorPad;-><init>()V
+               http://iptc.org/std/Iptc4xmpExt/2008-02-29/
+                   => Lo/xorPad;-><init>()V
+               http://javax.xml.XMLConstants/feature/secure-processing
+                   => Lo/getFingersToScan;->GvrSurfaceViewLogWriter()Ljavax/xml/parsers/DocumentBuilderFactory;
+               http://ns.adobe.com/DICOM/
+                   => Lo/xorPad;-><init>()V
+               http://ns.adobe.com/StockPhoto/1.0/
+                   => Lo/xorPad;-><init>()V
+               http://ns.adobe.com/TransformXMP/
+                   => Lo/xorPad;-><init>()V
+               http://ns.adobe.com/album/1.0/
+                   => Lo/xorPad;-><init>()V
+               http://ns.adobe.com/asf/1.0/
+                   => Lo/xorPad;-><init>()V
+               http://ns.adobe.com/bwf/bext/1.0/
+                   => Lo/xorPad;-><init>()V
+               http://ns.adobe.com/camera-raw-settings/1.0/
+                   => Lo/xorPad;-><init>()V
+               http://ns.adobe.com/creatorAtom/1.0/
+                   => Lo/xorPad;-><init>()V
+               http://ns.adobe.com/exif/1.0/
+                   => Lo/TransformedListIterator;->getCheckAfter(Lo/sendEventToAllConnections; Lo/getCurrencies;)Lo/getUIImplementation;
+                   => Lo/xorPad;-><init>()V
+               http://ns.adobe.com/exif/1.0/aux/
+                   => Lo/xorPad;-><init>()V
+               http://ns.adobe.com/iX/1.0/
+                   => Lo/xorPad;-><init>()V
+               http://ns.adobe.com/jp2k/1.0/
+                   => Lo/xorPad;-><init>()V
+               http://ns.adobe.com/jpeg/1.0/
+                   => Lo/xorPad;-><init>()V
+               http://ns.adobe.com/pdf/1.3/
+                   => Lo/xorPad;-><init>()V
+               http://ns.adobe.com/pdfx/1.3/
+                   => Lo/xorPad;-><init>()V
+               http://ns.adobe.com/photoshop/1.0/
+                   => Lo/xorPad;-><init>()V
+               http://ns.adobe.com/png/1.0/
+                   => Lo/xorPad;-><init>()V
+               http://ns.adobe.com/riff/info/
+                   => Lo/xorPad;-><init>()V
+               http://ns.adobe.com/swf/1.0/
+                   => Lo/xorPad;-><init>()V
+               http://ns.adobe.com/tiff/1.0/
+                   => Lo/xorPad;-><init>()V
+               http://ns.adobe.com/xap/1.0/
+                   => Lo/xorPad;-><init>()V
+               http://ns.adobe.com/xap/1.0/ 
+                   => Lo/generateDefaultOkHttp;-><clinit>()V
+               http://ns.adobe.com/xap/1.0/bj/
+                   => Lo/xorPad;-><init>()V
+               http://ns.adobe.com/xap/1.0/g/
+                   => Lo/xorPad;-><init>()V
+               http://ns.adobe.com/xap/1.0/g/img/
+                   => Lo/xorPad;-><init>()V
+               http://ns.adobe.com/xap/1.0/mm/
+                   => Lo/TransformedListIterator;->getCheckAfter(Lo/sendEventToAllConnections; Lo/getCurrencies;)Lo/getUIImplementation;
+                   => Lo/xorPad;-><init>()V
+               http://ns.adobe.com/xap/1.0/rights/
+                   => Lo/TransformedListIterator;->getCheckAfter(Lo/sendEventToAllConnections; Lo/getCurrencies;)Lo/getUIImplementation;
+                   => Lo/xorPad;-><init>()V
+               http://ns.adobe.com/xap/1.0/sType/Dimensions#
+                   => Lo/xorPad;-><init>()V
+               http://ns.adobe.com/xap/1.0/sType/Font#
+                   => Lo/xorPad;-><init>()V
+               http://ns.adobe.com/xap/1.0/sType/Job#
+                   => Lo/xorPad;-><init>()V
+               http://ns.adobe.com/xap/1.0/sType/ManifestItem#
+                   => Lo/xorPad;-><init>()V
+               http://ns.adobe.com/xap/1.0/sType/ResourceEvent#
+                   => Lo/xorPad;-><init>()V
+               http://ns.adobe.com/xap/1.0/sType/ResourceRef#
+                   => Lo/xorPad;-><init>()V
+               http://ns.adobe.com/xap/1.0/sType/Version#
+                   => Lo/xorPad;-><init>()V
+               http://ns.adobe.com/xap/1.0/t/
+                   => Lo/xorPad;-><init>()V
+               http://ns.adobe.com/xap/1.0/t/pg/
+                   => Lo/xorPad;-><init>()V
+               http://ns.adobe.com/xmp/1.0/DynamicMedia/
+                   => Lo/TransformedListIterator;->getCheckAfter(Lo/sendEventToAllConnections; Lo/getCurrencies;)Lo/getUIImplementation;
+                   => Lo/xorPad;-><init>()V
+               http://ns.adobe.com/xmp/1.0/Script/
+                   => Lo/xorPad;-><init>()V
+               http://ns.adobe.com/xmp/Identifier/qual/1.0/
+                   => Lo/xorPad;-><init>()V
+               http://ns.adobe.com/xmp/note/
+                   => Lo/xorPad;-><init>()V
+               http://ns.adobe.com/xmp/transient/1.0/
+                   => Lo/xorPad;-><init>()V
+               http://ns.adobe.com/xmp/wav/1.0/
+                   => Lo/xorPad;-><init>()V
+               http://ns.useplus.org/ldf/xmp/1.0/
+                   => Lo/xorPad;-><init>()V
+               http://purl.org/dc/1.1/
+                   => Lo/eglReleaseThread;->JcePasswordAuthenticatedRecipient1(Lo/sendEventToAllConnections; Lo/ProducerFactory;
+                    Lorg/w3c/dom/Node; Ljava/lang/String; Z)Lo/ProducerFactory;
+               http://purl.org/dc/elements/1.1/
+                   => Lo/eglReleaseThread;->JcePasswordAuthenticatedRecipient1(Lo/sendEventToAllConnections; Lo/ProducerFactory;
+                    Lorg/w3c/dom/Node; Ljava/lang/String; Z)Lo/ProducerFactory;
+                   => Lo/TransformedListIterator;->getCheckAfter(Lo/sendEventToAllConnections; Lo/getCurrencies;)Lo/getUIImplementation;
+                   => Lo/xorPad;-><init>()V
+               http://www.aiim.org/pdfa/ns/extension/
+                   => Lo/xorPad;-><init>()V
+               http://www.aiim.org/pdfa/ns/field#
+                   => Lo/xorPad;-><init>()V
+               http://www.aiim.org/pdfa/ns/id/
+                   => Lo/xorPad;-><init>()V
+               http://www.aiim.org/pdfa/ns/property#
+                   => Lo/xorPad;-><init>()V
+               http://www.aiim.org/pdfa/ns/schema#
+                   => Lo/xorPad;-><init>()V
+               http://www.aiim.org/pdfa/ns/type#
+                   => Lo/xorPad;-><init>()V
+               http://www.android.com/
+                   => Lcom/facebook/soloader/SoLoader;->loadLibraryOnNonAndroid(Ljava/lang/String;)Ljava/lang/Boolean;
+               http://www.npes.org/pdfx/ns/id/
+                   => Lo/xorPad;-><init>()V
+               http://xerces.apache.org/xerces2-j/features.html#disallow-doctype-decl
+                   => Lo/getFingersToScan;->GvrSurfaceViewLogWriter()Ljavax/xml/parsers/DocumentBuilderFactory;
+               http://xerces.apache.org/xerces2-j/features.html#external-parameter-entities
+                   => Lo/getFingersToScan;->GvrSurfaceViewLogWriter()Ljavax/xml/parsers/DocumentBuilderFactory;
+[Warning]  External Storage Accessing:
+           External storage access found (Remember DO NOT write important files to external storages):
+               => Lcom/facebook/soloader/SoLoader;->JcePasswordAuthenticatedRecipient1(Ljava/lang/String;)V (0x26c) --->
+                    Landroid/os/Environment;->getExternalStorageDirectory()Ljava/io/File;
+               => Lcom/facebook/soloader/SoLoader;->getCheckAfter(Ljava/lang/String;)V (0x1d2) --->
+                    Landroid/os/Environment;->getExternalStorageDirectory()Ljava/io/File;
+               => Lo/ProtobufDataEncoderContext1$1$2$3;->CipherOutputStream([Ljava/lang/Object;)Ljava/lang/Object; (0xf4) --->
+                    Landroid/os/Environment;->getExternalStorageDirectory()Ljava/io/File;
+               => Lo/ProtobufDataEncoderContext1$1$2;->addByteArrays([Ljava/lang/Object;)Ljava/lang/Object; (0xd2) --->
+                    Landroid/os/Environment;->getExternalStorageDirectory()Ljava/io/File;
+               => Lo/getQrType$1$3$1;->addByteArrays([Ljava/lang/Object;)Ljava/lang/Object; (0x166) --->
+                    Landroid/os/Environment;->getExternalStorageDirectory()Ljava/io/File;
+               => Lo/getQrType$1$3;->CipherOutputStream([Ljava/lang/Object;)Ljava/lang/Object; (0xb4) --->
+                    Landroid/os/Environment;->getExternalStorageDirectory()Ljava/io/File;
+               => Lo/glDetachShader$2$2$1;->JcePasswordAuthenticatedRecipient1([Ljava/lang/Object;)Ljava/lang/Object; (0xf8) --->
+                    Landroid/os/Environment;->getExternalStorageDirectory()Ljava/io/File;
+               => Lo/glDetachShader$2$2;->JcePasswordAuthenticatedRecipient1([Ljava/lang/Object;)Ljava/lang/Object; (0xd0) --->
+                    Landroid/os/Environment;->getExternalStorageDirectory()Ljava/io/File;
+               => Lo/isAtLeastJellyBean;->parsePathStrategy(Landroid/content/Context; Ljava/lang/String;
+                    I)Lo/isAtLeastJellyBean$JcePasswordAuthenticatedRecipient1; (0xb6) --->
+                    Landroid/os/Environment;->getExternalStorageDirectory()Ljava/io/File;
+               => Lo/requestBodyStart$1$3$3;->GvrSurfaceViewLogWriter([Ljava/lang/Object;)Ljava/lang/Object; (0x120) --->
+                    Landroid/os/Environment;->getExternalStorageDirectory()Ljava/io/File;
+               => Lo/requestBodyStart$1$3;->addByteArrays([Ljava/lang/Object;)Ljava/lang/Object; (0xba) --->
+                    Landroid/os/Environment;->getExternalStorageDirectory()Ljava/io/File;
+               => Lcom/facebook/soloader/SoFileLoaderImpl;->getCheckAfter(Ljava/lang/String;)V (0x43a) --->
+                    Landroid/os/Environment;->getExternalStorageDirectory()Ljava/io/File;
+               => Lcom/facebook/soloader/SystemLoadWrapperSoSource;->addByteArrays(Ljava/lang/String;)V (0x358) --->
+                    Landroid/os/Environment;->getExternalStorageDirectory()Ljava/io/File;
+               => Lcom/facebook/soloader/nativeloader/SystemDelegate;->addByteArrays(Ljava/lang/String;)V (0x2e2) --->
+                    Landroid/os/Environment;->getExternalStorageDirectory()Ljava/io/File;
+[Warning]  AndroidManifest Exported Components Checking:
+           Found "exported" components(except for Launcher) for receiving outside applications' actions (AndroidManifest.xml).
+           These components can be initilized by other apps. You should add or modify the attribute to [exported="false"] if you don't want
+           to.
+           You can also protect it with a customized permission with "signature" or higher protectionLevel and specify in
+           "android:permission" attribute.
+                  service => com.avanzasolutions.apps_sdk.service.APPSFirebaseMessagingService
+[Warning] <Sensitive_Information> Getting ANDROID_ID:
+           This app has code getting the 64-bit number "Settings.Secure.ANDROID_ID".
+           ANDROID_ID seems a good choice for a unique device identifier. There are downsides: First, it is not 100% reliable on releases of
+           Android prior to 2.2 (Froyo).
+           Also, there has been at least one widely-observed bug in a popular handset from a major manufacturer, where every instance has
+           the same ANDROID_ID.
+           If you want to get an unique id for the device, we suggest you use "Installation" framework in the following article.
+           Please check the reference: http://android-developers.blogspot.tw/2011/03/identifying-app-installations.html
+               => Lo/initDigest;->setIconSize()Ljava/lang/String; (0x2c) --->
+                    Landroid/provider/Settings$Secure;->getString(Landroid/content/ContentResolver; Ljava/lang/String;)Ljava/lang/String;
+               => Lo/initDigest;->setIconSize()Ljava/lang/String; (0x3e) --->
+                    Landroid/provider/Settings$Secure;->getString(Landroid/content/ContentResolver; Ljava/lang/String;)Ljava/lang/String;
+[Warning] <WebView> WebView Local File Access Attacks Checking:
+           Found "setAllowFileAccess(true)" or not set(enabled by default) in WebView. The attackers could inject malicious script into
+           WebView and exploit the opportunity to access local resources. This can be mitigated or prevented by disabling local file system
+           access. (It is enabled by default)
+           Note that this enables or disables file system access only. Assets and resources are still accessible using file:///android_asset
+           and file:///android_res.
+           The attackers can use "mWebView.loadUrl("file:///data/data/[Your_Package_Name]/[File]");" to access app's local file.
+           Reference: (1)https://labs.mwrinfosecurity.com/blog/2012/04/23/adventures-with-android-webviews/
+                      (2)http://developer.android.com/reference/android/webkit/WebSettings.html#setAllowFileAccess(boolean)
+           Please add or modify "yourWebView.getSettings().setAllowFileAccess(false)" to your WebView:
+               Lo/handleSetPressed;->getCheckAfter([Ljava/lang/Object;)Ljava/lang/Object;
+[Warning] <WebView> WebView Potential XSS Attacks Checking:
+           Found "setJavaScriptEnabled(true)" in WebView, which could exposed to potential XSS attacks. Please check the web page code
+           carefully and sanitize the output:
+               => Lo/handleSetPressed;->getCheckAfter([Ljava/lang/Object;)Ljava/lang/Object; (0x4a) --->
+                    Landroid/webkit/WebSettings;->setJavaScriptEnabled(Z)V
+[Notice] <Command> Executing "root" or System Privilege Checking:
+           The app may has the code checking for "root" permission, mounting filesystem operations or monitoring system:
+               Lcom/facebook/react/modules/systeminfo/AndroidInfoHelpers;->getMetroHostPropValue()Ljava/lang/String;  =>
+                    '/system/bin/getprop'
+[Notice]  File Unsafe Delete Checking:
+           Everything you delete may be recovered by any user or attacker, especially rooted devices.
+           Please make sure do not use "file.delete()" to delete essential files.
+           Check this video: https://www.youtube.com/watch?v=tGw1fxUD-uY
+               => Lcom/facebook/soloader/SysUtil;->deleteOrThrow(Ljava/io/File;)V (0x4c) ---> Ljava/io/File;->delete()Z
+               => Lo/ArrayBasedCharEscaper;->CipherOutputStream(Ljava/io/File;)Z (0x4a) ---> Ljava/io/File;->delete()Z
+               => Lo/CardProvisionFragment;->GvrSurfaceViewLogWriter()Ljava/io/File; (0x70) ---> Ljava/io/File;->delete()Z
+               => Lo/CardProvisionFragment;->GvrSurfaceViewLogWriter()Ljava/io/File; (0x8a) ---> Ljava/io/File;->delete()Z
+               => Lo/CardboardEmulatorControllerCallbacks;->CipherOutputStream()Ljava/util/List; (0x72) ---> Ljava/io/File;->delete()Z
+               => Lo/CardboardEmulatorControllerCallbacks;->CipherOutputStream()Ljava/util/List; (0x1d6) ---> Ljava/io/File;->delete()Z
+               => Lo/CardboardEmulatorControllerCallbacks;->CipherOutputStream()Ljava/util/List; (0x21a) ---> Ljava/io/File;->delete()Z
+               => Lo/CardboardEmulatorControllerCallbacks;->CipherOutputStream()Ljava/util/List; (0x2f8) ---> Ljava/io/File;->delete()Z
+               => Lo/ComponentActivity3;->Il_(Landroid/content/Context; Ljava/io/InputStream;)Landroid/graphics/Typeface; (0x1c) --->
+                    Ljava/io/File;->delete()Z
+               => Lo/ComponentActivity3;->Il_(Landroid/content/Context; Ljava/io/InputStream;)Landroid/graphics/Typeface; (0x34) --->
+                    Ljava/io/File;->delete()Z
+               => Lo/ComponentActivity3;->Il_(Landroid/content/Context; Ljava/io/InputStream;)Landroid/graphics/Typeface; (0x3e) --->
+                    Ljava/io/File;->delete()Z
+               => Lo/ComponentActivity3;->Il_(Landroid/content/Context; Ljava/io/InputStream;)Landroid/graphics/Typeface; (0x46) --->
+                    Ljava/io/File;->delete()Z
+               => Lo/ComponentActivity3;->Im_(Landroid/content/Context; Landroid/content/res/Resources; I Ljava/lang/String;
+                    I)Landroid/graphics/Typeface; (0x1c) ---> Ljava/io/File;->delete()Z
+               => Lo/ComponentActivity3;->Im_(Landroid/content/Context; Landroid/content/res/Resources; I Ljava/lang/String;
+                    I)Landroid/graphics/Typeface; (0x34) ---> Ljava/io/File;->delete()Z
+               => Lo/ComponentActivity3;->Im_(Landroid/content/Context; Landroid/content/res/Resources; I Ljava/lang/String;
+                    I)Landroid/graphics/Typeface; (0x3e) ---> Ljava/io/File;->delete()Z
+               => Lo/ComponentActivity3;->Im_(Landroid/content/Context; Landroid/content/res/Resources; I Ljava/lang/String;
+                    I)Landroid/graphics/Typeface; (0x46) ---> Ljava/io/File;->delete()Z
+               => Lo/generateDefaultOkHttp;->CipherOutputStream()V (0x1b2) ---> Ljava/io/File;->delete()Z
+               => Lo/generateDefaultOkHttp;->CipherOutputStream()V (0x30c) ---> Ljava/io/File;->delete()Z
+               => Lo/getAllowedHandwritingDelegatorPackageName;->GvrSurfaceViewLogWriter(Landroid/content/Context;
+                    Z)Lo/getAllowedHandwritingDelegatorPackageName$getCheckAfter; (0x1ea) ---> Ljava/io/File;->delete()Z
+               => Lo/getCacheDirectory;->GvrSurfaceViewLogWriter(Landroid/content/Context; Ljava/io/File; Ljava/io/File; Ljava/lang/String;
+                    Ljava/lang/String;)V (0x8c) ---> Ljava/io/File;->delete()Z
+               => Lo/getCacheDirectory;->GvrSurfaceViewLogWriter(Landroid/content/Context; Ljava/io/File; Ljava/io/File; Ljava/lang/String;
+                    Ljava/lang/String;)V (0xac) ---> Ljava/io/File;->delete()Z
+               => Lo/getPersistenceKey;->In_(Landroid/content/Context; Landroid/content/res/Resources; I)Ljava/nio/ByteBuffer; (0x1c) --->
+                    Ljava/io/File;->delete()Z
+               => Lo/getPersistenceKey;->In_(Landroid/content/Context; Landroid/content/res/Resources; I)Ljava/nio/ByteBuffer; (0x2c) --->
+                    Ljava/io/File;->delete()Z
+               => Lo/getPersistenceKey;->In_(Landroid/content/Context; Landroid/content/res/Resources; I)Ljava/nio/ByteBuffer; (0x36) --->
+                    Ljava/io/File;->delete()Z
+               => Lo/isAtLeastJellyBean;->delete(Landroid/net/Uri; Ljava/lang/String; [Ljava/lang/String;)I (0xc) --->
+                    Ljava/io/File;->delete()Z
+               => Lo/isEmojiCompatEnabled;->addByteArrays(Lo/RemovalCause2;)Lokhttp3/Response; (0x2a0) ---> Ljava/io/File;->delete()Z
+               => Lo/setOnViewTreeOwnersAvailable;->JcePasswordAuthenticatedRecipient1(Landroid/content/Context;
+                    Ljava/util/concurrent/Executor; Lo/setOnViewTreeOwnersAvailable$addByteArrays;)V (0x16) ---> Ljava/io/File;->delete()Z
+               => Lo/LineProcessor;->GvrSurfaceViewLogWriter(Ljava/lang/String;)Lo/CrlListID$JcePasswordAuthenticatedRecipient1; (0x1bc)
+                    ---> Ljava/io/File;->delete()Z
+               => Lo/LineProcessor;->JcePasswordAuthenticatedRecipient1(Ljava/lang/String;
+                    Lo/CrlListID$JcePasswordAuthenticatedRecipient1;)V (0xa2) ---> Ljava/io/File;->delete()Z
+               => Lo/LineProcessor;->JcePasswordAuthenticatedRecipient1(Ljava/lang/String;
+                    Lo/CrlListID$JcePasswordAuthenticatedRecipient1;)V (0x208) ---> Ljava/io/File;->delete()Z
+               => Lo/LineProcessor;->addByteArrays()V (0xb4) ---> Ljava/io/File;->delete()Z
+               => Lo/LineProcessor;->getCheckAfter()V (0x20) ---> Ljava/io/File;->delete()Z
+               => Lo/WebSocketReaderFrameCallback;->Ij_(Landroid/content/Context; Lo/isContentView$GvrSurfaceViewLogWriter;
+                    Landroid/content/res/Resources; I)Landroid/graphics/Typeface; (0x40) ---> Ljava/io/File;->delete()Z
+               => Lo/WebSocketReaderFrameCallback;->Ij_(Landroid/content/Context; Lo/isContentView$GvrSurfaceViewLogWriter;
+                    Landroid/content/res/Resources; I)Landroid/graphics/Typeface; (0x6c) ---> Ljava/io/File;->delete()Z
+               => Lo/WebSocketReaderFrameCallback;->Ij_(Landroid/content/Context; Lo/isContentView$GvrSurfaceViewLogWriter;
+                    Landroid/content/res/Resources; I)Landroid/graphics/Typeface; (0x74) ---> Ljava/io/File;->delete()Z
+               => Lo/WebSocketReaderFrameCallback;->Ij_(Landroid/content/Context; Lo/isContentView$GvrSurfaceViewLogWriter;
+                    Landroid/content/res/Resources; I)Landroid/graphics/Typeface; (0x82) ---> Ljava/io/File;->delete()Z
+               => Lo/WebSocketReaderFrameCallback;->Ij_(Landroid/content/Context; Lo/isContentView$GvrSurfaceViewLogWriter;
+                    Landroid/content/res/Resources; I)Landroid/graphics/Typeface; (0x8a) ---> Ljava/io/File;->delete()Z
+               => Lo/adjustCounter;->CipherOutputStream(Ljava/lang/Object; Lo/isRTLForced;)Ljava/lang/Object; (0x206) --->
+                    Ljava/io/File;->delete()Z
+               => Lo/getBitmapPool;->rA_(Ljava/io/File; Ljava/io/File;)Landroid/net/Uri; (0xc) ---> Ljava/io/File;->delete()Z
+               => Lo/getBitmapPool;->rD_(Ljava/io/File; Lo/hasRevocationReason$getJSHierarchy;)Landroid/net/Uri; (0x60) --->
+                    Ljava/io/File;->delete()Z
+               => Lo/getBitmapPool;->rD_(Ljava/io/File; Lo/hasRevocationReason$getJSHierarchy;)Landroid/net/Uri; (0x7e) --->
+                    Ljava/io/File;->delete()Z
+               => Lokhttp3/internal/io/FileSystem$Companion$SystemFileSystem;->delete(Ljava/io/File;)V (0xa) ---> Ljava/io/File;->delete()Z
+               => Lokhttp3/internal/io/FileSystem$Companion$SystemFileSystem;->deleteContents(Ljava/io/File;)V (0x3a) --->
+                    Ljava/io/File;->delete()Z
+[Notice] <KeyStore><Hacker> Possible KeyStore File Location:
+           BKS possible keystore file:
+               stamp-cert-sha256
+[Notice] <Signature><Hacker> Getting Signature Code Checking:
+           This app has code checking the package signature in the code. It might be used to check for whether the app is hacked by the
+           attackers.
+               => Lo/getImagePipeline$CipherOutputStream;->RH_(Landroid/content/pm/PackageManager;
+                    Ljava/lang/String;)[Landroid/content/pm/Signature; (0x4) --->
+                    Landroid/content/pm/PackageManager;->getPackageInfo(Ljava/lang/String; I)Landroid/content/pm/PackageInfo;
+               => Lo/getIssuingDistributionPoint;->JX_(Landroid/content/Context; Lo/onAttachToView;
+                    Landroid/os/CancellationSignal;)Lo/parseJavaClassPath$addByteArrays; (0x3e) --->
+                    Landroid/content/pm/PackageManager;->getPackageInfo(Ljava/lang/String; I)Landroid/content/pm/PackageInfo;
+               => Lo/getImagePipeline$addByteArrays;->RH_(Landroid/content/pm/PackageManager;
+                    Ljava/lang/String;)[Landroid/content/pm/Signature; (0x4) --->
+                    Landroid/content/pm/PackageManager;->getPackageInfo(Ljava/lang/String; I)Landroid/content/pm/PackageInfo;
+[Notice]  Native Library Loading Checking:
+           Native library loading codes(System.loadLibrary(...)) found:
+               [libimage_processing_util_jni.so]
+               => Landroidx/camera/core/ImageProcessingUtil;-><clinit>()V (0x4) ---> Ljava/lang/System;->loadLibrary(Ljava/lang/String;)V
+[Notice]  AndroidManifest Exported Components Checking 2:
+           Found "exported" components(except for Launcher) for receiving Google's "Android" actions (AndroidManifest.xml):
+                 activity => com.avanzasolutions.apps_sdk.view.AppsMainActivity
+                 activity => com.avanzasolutions.apps_sdk.view.scan_qr.AppsScanQRActivity
+                 receiver => com.learnium.RNDeviceInfo.RNDeviceReceiver
+
+------------------------------------------------------------
+AndroBugs analyzing time: 52.966 secs
+Total elapsed time: 128.275 secs

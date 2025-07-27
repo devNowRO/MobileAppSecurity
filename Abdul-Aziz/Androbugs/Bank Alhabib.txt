@@ -1,0 +1,381 @@
+*************************************************************************
+**   AndroBugs Framework - Android App Security Vulnerability Scanner  **
+**                            version: 1.0.0                           **
+**     author: Yu-Cheng Lin (@AndroBugs, http://www.AndroBugs.com)     **
+**               contact: androbugs.framework@gmail.com                **
+*************************************************************************
+Platform: Android
+Package Name: com.ofss.digx.mobile.obdx.bahl
+Package Version Name: 1.0.56
+Package Version Code: 10056
+Min Sdk: 23
+Target Sdk: 34
+MD5   : e50b82b5992672b861ba5e339b31e392
+SHA1  : a46df1e8ad02083488e3e39c365e111ea02aab02
+SHA256: eafd90a2222df208781f20b0f60132abdb3c82e90e6ebae6fb63cdeb43306c3e
+SHA512: 0a2beb6f81ade144ce741899f3eb1d8f286182e7b7bce80d5bd130ddb66c5d4f1c145f13d001ed756142e833147ce417f221cf6a117c937249fd114a5de5ac17
+Analyze Signature: 748283ba6968122ffac2fab9bd5728c0cd0d589f05a4292312c46fcc9c5be9fa6932bd29cf326ce15c221611274f6724a68424f32b46c2d13a9c2b50fd8f73e7
+------------------------------------------------------------------------------------------------
+[Critical] <SSL_Security> SSL Connection Checking:
+           URLs that are NOT under SSL (Total:60):
+               http://cipa.jp/exif/1.0/
+                   => Ld1/p;->g()V
+               http://iptc.org/std/Iptc4xmpCore/1.0/xmlns/
+                   => Ld1/p;->g()V
+               http://iptc.org/std/Iptc4xmpExt/2008-02-29/
+                   => Ld1/p;->g()V
+               http://javax.xml.XMLConstants/feature/secure-processing
+                   => Ld1/l;->a()Ljavax/xml/parsers/DocumentBuilderFactory;
+               http://ns.adobe.com/DICOM/
+                   => Ld1/p;->g()V
+               http://ns.adobe.com/StockPhoto/1.0/
+                   => Ld1/p;->g()V
+               http://ns.adobe.com/TransformXMP/
+                   => Ld1/p;->g()V
+               http://ns.adobe.com/album/1.0/
+                   => Ld1/p;->g()V
+               http://ns.adobe.com/asf/1.0/
+                   => Ld1/p;->g()V
+               http://ns.adobe.com/bwf/bext/1.0/
+                   => Ld1/p;->g()V
+               http://ns.adobe.com/camera-raw-settings/1.0/
+                   => Ld1/p;->g()V
+               http://ns.adobe.com/creatorAtom/1.0/
+                   => Ld1/p;->g()V
+               http://ns.adobe.com/exif/1.0/
+                   => Ld1/p;->g()V
+                   => Ld1/o;->j(Ld1/k;)V
+               http://ns.adobe.com/exif/1.0/aux/
+                   => Ld1/p;->g()V
+               http://ns.adobe.com/iX/1.0/
+                   => Ld1/p;->g()V
+               http://ns.adobe.com/jp2k/1.0/
+                   => Ld1/p;->g()V
+               http://ns.adobe.com/jpeg/1.0/
+                   => Ld1/p;->g()V
+               http://ns.adobe.com/pdf/1.3/
+                   => Ld1/p;->g()V
+                   => Ld1/p;->f()V
+               http://ns.adobe.com/pdfx/1.3/
+                   => Ld1/p;->g()V
+               http://ns.adobe.com/photoshop/1.0/
+                   => Ld1/p;->f()V
+                   => Ld1/p;->g()V
+               http://ns.adobe.com/png/1.0/
+                   => Ld1/p;->g()V
+                   => Ld1/p;->f()V
+               http://ns.adobe.com/riff/info/
+                   => Ld1/p;->g()V
+               http://ns.adobe.com/swf/1.0/
+                   => Ld1/p;->g()V
+               http://ns.adobe.com/tiff/1.0/
+                   => Ld1/p;->g()V
+                   => Ld1/p;->f()V
+               http://ns.adobe.com/xap/1.0/
+                   => Ld1/p;->f()V
+                   => Ld1/p;->g()V
+               http://ns.adobe.com/xap/1.0/ 
+                   => Lt4/c;->a(Ljava/lang/Iterable; Lr3/e; Lf3/f;)V
+                   => Lk0/a;-><clinit>()V
+               http://ns.adobe.com/xap/1.0/bj/
+                   => Ld1/p;->g()V
+               http://ns.adobe.com/xap/1.0/g/
+                   => Ld1/p;->g()V
+               http://ns.adobe.com/xap/1.0/g/img/
+                   => Ld1/p;->g()V
+               http://ns.adobe.com/xap/1.0/mm/
+                   => Ld1/p;->g()V
+                   => Ld1/o;->l(Ld1/m;)V
+               http://ns.adobe.com/xap/1.0/rights/
+                   => Ld1/p;->g()V
+                   => Ld1/p;->f()V
+                   => Ld1/o;->j(Ld1/k;)V
+               http://ns.adobe.com/xap/1.0/sType/Dimensions#
+                   => Ld1/p;->g()V
+               http://ns.adobe.com/xap/1.0/sType/Font#
+                   => Ld1/p;->g()V
+               http://ns.adobe.com/xap/1.0/sType/Job#
+                   => Ld1/p;->g()V
+               http://ns.adobe.com/xap/1.0/sType/ManifestItem#
+                   => Ld1/p;->g()V
+               http://ns.adobe.com/xap/1.0/sType/ResourceEvent#
+                   => Ld1/p;->g()V
+               http://ns.adobe.com/xap/1.0/sType/ResourceRef#
+                   => Ld1/p;->g()V
+               http://ns.adobe.com/xap/1.0/sType/Version#
+                   => Ld1/p;->g()V
+               http://ns.adobe.com/xap/1.0/t/
+                   => Ld1/p;->g()V
+               http://ns.adobe.com/xap/1.0/t/pg/
+                   => Ld1/p;->g()V
+               http://ns.adobe.com/xmp/1.0/DynamicMedia/
+                   => Ld1/p;->g()V
+                   => Ld1/o;->j(Ld1/k;)V
+               http://ns.adobe.com/xmp/1.0/Script/
+                   => Ld1/p;->g()V
+               http://ns.adobe.com/xmp/Identifier/qual/1.0/
+                   => Ld1/p;->g()V
+               http://ns.adobe.com/xmp/extension/ 
+                   => Lt4/c;->a(Ljava/lang/Iterable; Lr3/e; Lf3/f;)V
+               http://ns.adobe.com/xmp/note/
+                   => Ld1/p;->g()V
+                   => Lt4/c;->h(Lr3/e;)Ljava/lang/String;
+               http://ns.adobe.com/xmp/transient/1.0/
+                   => Ld1/p;->g()V
+               http://ns.adobe.com/xmp/wav/1.0/
+                   => Ld1/p;->g()V
+               http://ns.useplus.org/ldf/xmp/1.0/
+                   => Ld1/p;->g()V
+               http://purl.org/dc/1.1/
+                   => Ld1/f;->a(Ld1/k; Ld1/m; Lorg/w3c/dom/Node; Ljava/lang/String; Z)Ld1/m;
+               http://purl.org/dc/elements/1.1/
+                   => Ld1/p;->f()V
+                   => Ld1/p;->g()V
+                   => Ld1/f;->a(Ld1/k; Ld1/m; Lorg/w3c/dom/Node; Ljava/lang/String; Z)Ld1/m;
+                   => Ld1/o;->e(Lc1/d; Ld1/m;)V
+                   => Ld1/o;->j(Ld1/k;)V
+               http://www.aiim.org/pdfa/ns/extension/
+                   => Ld1/p;->g()V
+               http://www.aiim.org/pdfa/ns/field#
+                   => Ld1/p;->g()V
+               http://www.aiim.org/pdfa/ns/id/
+                   => Ld1/p;->g()V
+               http://www.aiim.org/pdfa/ns/property#
+                   => Ld1/p;->g()V
+               http://www.aiim.org/pdfa/ns/schema#
+                   => Ld1/p;->g()V
+               http://www.aiim.org/pdfa/ns/type#
+                   => Ld1/p;->g()V
+               http://www.android.com/
+                   => Lcom/facebook/soloader/SoLoader;->l(Ljava/lang/String; I)Z
+               http://www.npes.org/pdfx/ns/id/
+                   => Ld1/p;->g()V
+               http://xerces.apache.org/xerces2-j/features.html#disallow-doctype-decl
+                   => Ld1/l;->a()Ljavax/xml/parsers/DocumentBuilderFactory;
+               http://xerces.apache.org/xerces2-j/features.html#external-parameter-entities
+                   => Ld1/l;->a()Ljavax/xml/parsers/DocumentBuilderFactory;
+[Warning]  External Storage Accessing:
+           External storage access found (Remember DO NOT write important files to external storages):
+               => Landroidx/core/content/b;->h(Landroid/content/Context; Ljava/lang/String; I)Landroidx/core/content/b$b; (0xb8) --->
+                    Landroid/os/Environment;->getExternalStorageDirectory()Ljava/io/File;
+               => Lg7/y;->a0()V (0xc) ---> Landroid/os/Environment;->getExternalStorageDirectory()Ljava/io/File;
+               => Lg7/y;->f0()V (0xc) ---> Landroid/os/Environment;->getExternalStorageDirectory()Ljava/io/File;
+               => Lm5/a;->b()V (0x26) ---> Landroid/os/Environment;->getExternalStorageDirectory()Ljava/io/File;
+               => Lb5/a;->y(Ljava/io/File; La5/a;)Z (0x2) ---> Landroid/os/Environment;->getExternalStorageDirectory()Ljava/io/File;
+               => Lcom/agomezmoron/saveImageGallery/SaveImageGallery;->c(Landroid/graphics/Bitmap; Ljava/lang/String; Ljava/lang/String;
+                    I)Ljava/io/File; (0x16) ---> Landroid/os/Environment;->getExternalStorageDirectory()Ljava/io/File;
+[Warning] <Sensitive_Information> Getting ANDROID_ID:
+           This app has code getting the 64-bit number "Settings.Secure.ANDROID_ID".
+           ANDROID_ID seems a good choice for a unique device identifier. There are downsides: First, it is not 100% reliable on releases of
+           Android prior to 2.2 (Froyo).
+           Also, there has been at least one widely-observed bug in a popular handset from a major manufacturer, where every instance has
+           the same ANDROID_ID.
+           If you want to get an unique id for the device, we suggest you use "Installation" framework in the following article.
+           Please check the reference: http://android-developers.blogspot.tw/2011/03/identifying-app-installations.html
+               => Lcom/facebook/react/modules/systeminfo/AndroidInfoModule;->getAndroidID()Ljava/lang/String; (0x14) --->
+                    Landroid/provider/Settings$Secure;->getString(Landroid/content/ContentResolver; Ljava/lang/String;)Ljava/lang/String;
+[Warning] <WebView> WebView Local File Access Attacks Checking:
+           Found "setAllowFileAccess(true)" or not set(enabled by default) in WebView. The attackers could inject malicious script into
+           WebView and exploit the opportunity to access local resources. This can be mitigated or prevented by disabling local file system
+           access. (It is enabled by default)
+           Note that this enables or disables file system access only. Assets and resources are still accessible using file:///android_asset
+           and file:///android_res.
+           The attackers can use "mWebView.loadUrl("file:///data/data/[Your_Package_Name]/[File]");" to access app's local file.
+           Reference: (1)https://labs.mwrinfosecurity.com/blog/2012/04/23/adventures-with-android-webviews/
+                      (2)http://developer.android.com/reference/android/webkit/WebSettings.html#setAllowFileAccess(boolean)
+           Please add or modify "yourWebView.getSettings().setAllowFileAccess(false)" to your WebView:
+               Lg7/a0;->x(I)V
+[Warning] <WebView> WebView Potential XSS Attacks Checking:
+           Found "setJavaScriptEnabled(true)" in WebView, which could exposed to potential XSS attacks. Please check the web page code
+           carefully and sanitize the output:
+               => Lg7/a0;->x(I)V (0x5e) ---> Landroid/webkit/WebSettings;->setJavaScriptEnabled(Z)V
+[Notice]  AndroidManifest Adb Backup Checking:
+           ADB Backup is ENABLED for this app (default: ENABLED). ADB Backup is a good tool for backing up all of your files. If it's open
+           for this app, people who have your phone can copy all of the sensitive data for this app in your phone (Prerequisite: 1.Unlock
+           phone's screen 2.Open the developer mode). The sensitive data may include lifetime access token, username or password, etc.
+           Security case related to ADB Backup:
+           1.http://www.securityfocus.com/archive/1/530288/30/0/threaded
+           2.http://blog.c22.cc/advisories/cve-2013-5112-evernote-android-insecure-storage-of-pin-data-bypass-of-pin-protection/
+           3.http://nelenkov.blogspot.co.uk/2012/06/unpacking-android-backups.html
+           Reference: http://developer.android.com/guide/topics/manifest/application-element.html#allowbackup
+[Notice] <Command> Executing "root" or System Privilege Checking:
+           The app may has the code checking for "root" permission, mounting filesystem operations or monitoring system:
+               Ly7/a;->b()Ljava/lang/String;  => '/system/bin/getprop'
+[Notice] <Database><#CVE-2011-3901#> Android SQLite Databases Vulnerability Checking:
+           This app is using Android SQLite databases but it's "NOT" suffering from SQLite Journal Information Disclosure Vulnerability.
+[Notice]  File Unsafe Delete Checking:
+           Everything you delete may be recovered by any user or attacker, especially rooted devices.
+           Please make sure do not use "file.delete()" to delete essential files.
+           Check this video: https://www.youtube.com/watch?v=tGw1fxUD-uY
+               => Landroidx/core/content/b;->delete(Landroid/net/Uri; Ljava/lang/String; [Ljava/lang/String;)I (0xc) --->
+                    Ljava/io/File;->delete()Z
+               => Landroidx/core/graphics/j;->c(Landroid/content/Context; Ljava/io/InputStream;)Landroid/graphics/Typeface; (0x1c) --->
+                    Ljava/io/File;->delete()Z
+               => Landroidx/core/graphics/j;->c(Landroid/content/Context; Ljava/io/InputStream;)Landroid/graphics/Typeface; (0x34) --->
+                    Ljava/io/File;->delete()Z
+               => Landroidx/core/graphics/j;->c(Landroid/content/Context; Ljava/io/InputStream;)Landroid/graphics/Typeface; (0x3e) --->
+                    Ljava/io/File;->delete()Z
+               => Landroidx/core/graphics/j;->c(Landroid/content/Context; Ljava/io/InputStream;)Landroid/graphics/Typeface; (0x46) --->
+                    Ljava/io/File;->delete()Z
+               => Landroidx/core/graphics/j;->d(Landroid/content/Context; Landroid/content/res/Resources; I Ljava/lang/String;
+                    I)Landroid/graphics/Typeface; (0x1c) ---> Ljava/io/File;->delete()Z
+               => Landroidx/core/graphics/j;->d(Landroid/content/Context; Landroid/content/res/Resources; I Ljava/lang/String;
+                    I)Landroid/graphics/Typeface; (0x34) ---> Ljava/io/File;->delete()Z
+               => Landroidx/core/graphics/j;->d(Landroid/content/Context; Landroid/content/res/Resources; I Ljava/lang/String;
+                    I)Landroid/graphics/Typeface; (0x3e) ---> Ljava/io/File;->delete()Z
+               => Landroidx/core/graphics/j;->d(Landroid/content/Context; Landroid/content/res/Resources; I Ljava/lang/String;
+                    I)Landroid/graphics/Typeface; (0x46) ---> Ljava/io/File;->delete()Z
+               => Landroidx/core/graphics/k;->b(Landroid/content/Context; Landroid/content/res/Resources; I)Ljava/nio/ByteBuffer; (0x1c)
+                    ---> Ljava/io/File;->delete()Z
+               => Landroidx/core/graphics/k;->b(Landroid/content/Context; Landroid/content/res/Resources; I)Ljava/nio/ByteBuffer; (0x2c)
+                    ---> Ljava/io/File;->delete()Z
+               => Landroidx/core/graphics/k;->b(Landroid/content/Context; Landroid/content/res/Resources; I)Ljava/nio/ByteBuffer; (0x36)
+                    ---> Ljava/io/File;->delete()Z
+               => Lcom/facebook/soloader/SysUtil;->b(Ljava/io/File;)V (0x32) ---> Ljava/io/File;->delete()Z
+               => Lcom/google/android/gms/iid/zzn;->zzg(Landroid/content/Context; Ljava/lang/String;)V (0x14) ---> Ljava/io/File;->delete()Z
+               => Lcom/google/android/gms/iid/zzn;->zzi(Landroid/content/Context;)V (0x34) ---> Ljava/io/File;->delete()Z
+               => Lcom/google/android/gms/internal/gtm/zzcd;->getWritableDatabase()Landroid/database/sqlite/SQLiteDatabase; (0x68) --->
+                    Ljava/io/File;->delete()Z
+               => Lg5/a;->b(Ljava/io/File;)Z (0x12) ---> Ljava/io/File;->delete()Z
+               => Lg5/c;->a(Ljava/io/File;)V (0x1a) ---> Ljava/io/File;->delete()Z
+               => Lg5/c;->b(Ljava/io/File; Ljava/io/File;)V (0xc) ---> Ljava/io/File;->delete()Z
+               => Lg7/s;->a(Ljava/util/Collection;)V (0x110) ---> Ljava/io/File;->delete()Z
+               => Lg7/y;->j(Ljava/io/File;)V (0x3e) ---> Ljava/io/File;->delete()Z
+               => Lk0/a;->b0()V (0x1e8) ---> Ljava/io/File;->delete()Z
+               => Lk0/a;->b0()V (0x27e) ---> Ljava/io/File;->delete()Z
+               => Lq1/b;->d()Ljava/io/File; (0x26) ---> Ljava/io/File;->delete()Z
+               => Lu4/f;->c()Lu4/l; (0x54) ---> Ljava/io/File;->delete()Z
+               => Lu4/f;->c()Lu4/l; (0xa0) ---> Ljava/io/File;->delete()Z
+               => Lu4/f;->c()Lu4/l; (0xce) ---> Ljava/io/File;->delete()Z
+               => Lu4/f;->c()Lu4/l; (0xfc) ---> Ljava/io/File;->delete()Z
+               => Lu4/f;->d(Lu4/l;)V (0x62) ---> Ljava/io/File;->delete()Z
+               => Ly1/a;->P(Ljava/io/File; I I J)Ly1/a; (0x44) ---> Ljava/io/File;->delete()Z
+               => Ly1/a;->U()V (0x18e) ---> Ljava/io/File;->delete()Z
+               => Ly1/a;->z(Ljava/io/File;)V (0xc) ---> Ljava/io/File;->delete()Z
+               => Ly1/a;->V(Ljava/lang/String;)Z (0x4a) ---> Ljava/io/File;->delete()Z
+               => Ly1/c;->b(Ljava/io/File;)V (0x2a) ---> Ljava/io/File;->delete()Z
+               => Landroidx/core/graphics/e;->a(Landroid/content/Context; Landroidx/core/content/res/e$c; Landroid/content/res/Resources;
+                    I)Landroid/graphics/Typeface; (0x40) ---> Ljava/io/File;->delete()Z
+               => Landroidx/core/graphics/e;->a(Landroid/content/Context; Landroidx/core/content/res/e$c; Landroid/content/res/Resources;
+                    I)Landroid/graphics/Typeface; (0x68) ---> Ljava/io/File;->delete()Z
+               => Landroidx/core/graphics/e;->a(Landroid/content/Context; Landroidx/core/content/res/e$c; Landroid/content/res/Resources;
+                    I)Landroid/graphics/Typeface; (0x7c) ---> Ljava/io/File;->delete()Z
+               => Landroidx/core/graphics/e;->a(Landroid/content/Context; Landroidx/core/content/res/e$c; Landroid/content/res/Resources;
+                    I)Landroid/graphics/Typeface; (0x84) ---> Ljava/io/File;->delete()Z
+               => Lb5/a$f;->b()Z (0x14) ---> Ljava/io/File;->delete()Z
+               => Lb5/a$g;->a(Ljava/io/File;)V (0x14) ---> Ljava/io/File;->delete()Z
+               => Lb5/a$g;->c(Ljava/io/File;)V (0x20) ---> Ljava/io/File;->delete()Z
+               => Lb5/a;->p(Ljava/io/File;)J (0x1a) ---> Ljava/io/File;->delete()Z
+               => Lcom/agomezmoron/saveImageGallery/SaveImageGallery;->a(Lorg/json/JSONArray; Lorg/apache/cordova/CallbackContext;)V (0x3a)
+                    ---> Ljava/io/File;->delete()Z
+               => Lcom/facebook/react/modules/camera/ImageEditingManager$b;->a(Ljava/io/File;)V (0x22) ---> Ljava/io/File;->delete()Z
+               => Lcom/google/android/gms/measurement/internal/zzav;->getWritableDatabase()Landroid/database/sqlite/SQLiteDatabase; (0x70)
+                    ---> Ljava/io/File;->delete()Z
+               => Lcom/google/android/gms/measurement/internal/zzge;->getWritableDatabase()Landroid/database/sqlite/SQLiteDatabase; (0x40)
+                    ---> Ljava/io/File;->delete()Z
+               => Lf0/m;->z(Ljava/lang/Object; Lmf/d;)Ljava/lang/Object; (0x19c) ---> Ljava/io/File;->delete()Z
+               => Lx1/d;->i()V (0x82) ---> Ljava/io/File;->delete()Z
+               => Lx1/d;->c(Ljava/lang/String; Lw1/b$a;)V (0xc2) ---> Ljava/io/File;->delete()Z
+               => Lx1/d;->initialize()V (0xae) ---> Ljava/io/File;->delete()Z
+               => Lx1/d;->p(Ljava/lang/String;)V (0xa) ---> Ljava/io/File;->delete()Z
+               => Lcom/google/android/gms/common/data/BitmapTeleporter;->writeToParcel(Landroid/os/Parcel; I)V (0x76) --->
+                    Ljava/io/File;->delete()Z
+               => Lcom/facebook/react/devsupport/JSCHeapCapture;->captureHeap(Ljava/lang/String;
+                    Lcom/facebook/react/devsupport/JSCHeapCapture$a;)V (0x4e) ---> Ljava/io/File;->delete()Z
+[Notice] <Debug><Hacker> Codes for Checking Android Debug Mode:
+           Found codes for checking "ApplicationInfo.FLAG_DEBUGGABLE" in AndroidManifest.xml:
+               => Lcom/google/android/gms/common/GoogleSignatureVerifier;->zzc (Ljava/lang/String; Z Z)Lcom/google/android/gms/common/zzx;
+[Notice] <Hacker> APK Installing Source Checking:
+           This app has code checking APK installer sources(e.g. from Google Play, from Amazon, etc.). It might be used to check for whether
+           the app is hacked by the attackers.
+               => Lcom/google/android/gms/analytics/zzr;->zzc()Lcom/google/android/gms/internal/gtm/zzav; (0x3a) --->
+                    Landroid/content/pm/PackageManager;->getInstallerPackageName(Ljava/lang/String;)Ljava/lang/String;
+               => Lg7/b;->i(Landroid/content/Context;)Ljava/lang/String; (0x14) --->
+                    Landroid/content/pm/PackageManager;->getInstallerPackageName(Ljava/lang/String;)Ljava/lang/String;
+               => Lcom/google/android/gms/measurement/internal/zzgc;->zzx()V (0x5a) --->
+                    Landroid/content/pm/PackageManager;->getInstallerPackageName(Ljava/lang/String;)Ljava/lang/String;
+[Notice] <KeyStore><Hacker> Possible KeyStore File Location:
+           BKS possible keystore file:
+               assets/www/components/compliance/entity-certification/entity-certification.html
+               assets/www/components/compliance/entity-certification/entity-certification.js
+               assets/www/components/compliance/entity-certification/entity-certification.json
+               assets/www/components/compliance/entity-certification/loader.js
+               assets/www/components/compliance/entity-certification/model.js
+               assets/www/components/compliance/entity-certification.js
+               assets/www/components/interest-certificates/META-INF/UIAuthorization.json
+               assets/www/components/interest-certificates/balance-certificate/balance-certificate.html
+               assets/www/components/interest-certificates/balance-certificate/balance-certificate.js
+               assets/www/components/interest-certificates/balance-certificate/balance-certificate.json
+               assets/www/components/interest-certificates/balance-certificate/loader.js
+               assets/www/components/interest-certificates/balance-certificate/model.js
+               assets/www/components/interest-certificates/balance-certificate.js
+               assets/www/components/interest-certificates/interest-certificate-casa/interest-certificate-casa.html
+               assets/www/components/interest-certificates/interest-certificate-casa/interest-certificate-casa.js
+               assets/www/components/interest-certificates/interest-certificate-casa/interest-certificate-casa.json
+               assets/www/components/interest-certificates/interest-certificate-casa/loader.js
+               assets/www/components/interest-certificates/interest-certificate-casa/model.js
+               assets/www/components/interest-certificates/interest-certificate-casa.js
+               assets/www/components/interest-certificates/interest-certificate-loans/interest-certificate-loans.html
+               assets/www/components/interest-certificates/interest-certificate-loans/interest-certificate-loans.js
+               assets/www/components/interest-certificates/interest-certificate-loans/interest-certificate-loans.json
+               assets/www/components/interest-certificates/interest-certificate-loans/loader.js
+               assets/www/components/interest-certificates/interest-certificate-loans/model.js
+               assets/www/components/interest-certificates/interest-certificate-loans.js
+               assets/www/components/interest-certificates/interest-certificate-td/interest-certificate-td.css
+               assets/www/components/interest-certificates/interest-certificate-td/interest-certificate-td.html
+               assets/www/components/interest-certificates/interest-certificate-td/interest-certificate-td.js
+               assets/www/components/interest-certificates/interest-certificate-td/interest-certificate-td.json
+               assets/www/components/interest-certificates/interest-certificate-td/loader.js
+               assets/www/components/interest-certificates/interest-certificate-td/model.js
+               assets/www/components/interest-certificates/interest-certificate-td.js
+               assets/www/extensions/components/interest-certificates/account-maintenance/account-maintenance.html
+               assets/www/extensions/components/interest-certificates/account-maintenance/account-maintenance.js
+               assets/www/extensions/components/interest-certificates/account-maintenance/account-maintenance.json
+               assets/www/extensions/components/interest-certificates/account-maintenance/loader.js
+               assets/www/extensions/components/interest-certificates/account-maintenance/model.js
+               assets/www/extensions/components/interest-certificates/account-prop/account-prop.html
+               assets/www/extensions/components/interest-certificates/account-prop/account-prop.js
+               assets/www/extensions/components/interest-certificates/account-prop/account-prop.json
+               assets/www/extensions/components/interest-certificates/account-prop/loader.js
+               assets/www/extensions/components/interest-certificates/account-prop/model.js
+               assets/www/extensions/components/interest-certificates/balance-certificate/balance-certificate.html
+               assets/www/extensions/components/interest-certificates/balance-certificate/balance-certificate.js
+               assets/www/extensions/components/interest-certificates/balance-certificate/balance-certificate.json
+               assets/www/extensions/components/interest-certificates/balance-certificate/loader.js
+               assets/www/extensions/components/interest-certificates/balance-certificate/model.js
+               assets/www/extensions/partials/help/interest-certificate.html
+               assets/www/images/customsvg/certificates-bahl.svg
+               assets/www/images/dashboard/payments/interest-certificate.svg
+               assets/www/images/help-icons/interest-certificate.svg
+               assets/www/images/info-icon/interest-certificate.svg
+               assets/www/lzn/beta/partials/origination/review/certifications.html
+               assets/www/lzn/beta/resources/nls/certifications.js
+               assets/www/partials/help/balance-certificate.html
+               assets/www/partials/help/interest-certificate.html
+               assets/www/partials/interest-certificate/interest-certificate.html
+               assets/www/resources/nls/entity-certification.js
+               assets/www/resources/nls/interest-certificates.js
+               stamp-cert-sha256
+[Notice] <Signature><Hacker> Getting Signature Code Checking:
+           This app has code checking the package signature in the code. It might be used to check for whether the app is hacked by the
+           attackers.
+               => Landroidx/core/provider/d;->f(Landroid/content/pm/PackageManager; Landroidx/core/provider/e;
+                    Landroid/content/res/Resources;)Landroid/content/pm/ProviderInfo; (0x36) --->
+                    Landroid/content/pm/PackageManager;->getPackageInfo(Ljava/lang/String; I)Landroid/content/pm/PackageInfo;
+               => Lcom/google/android/gms/common/GooglePlayServicesUtilLight;->isGooglePlayServicesAvailable(Landroid/content/Context; I)I
+                    (0xfc) ---> Landroid/content/pm/PackageManager;->getPackageInfo(Ljava/lang/String; I)Landroid/content/pm/PackageInfo;
+               => Lcom/google/android/gms/common/GoogleSignatureVerifier;->zzc(Ljava/lang/String; Z Z)Lcom/google/android/gms/common/zzx;
+                    (0x56) ---> Landroid/content/pm/PackageManager;->getPackageInfo(Ljava/lang/String; I)Landroid/content/pm/PackageInfo;
+               => Lcom/google/android/gms/common/util/UidVerifier;->isGooglePlayServicesUid(Landroid/content/Context; I)Z (0x1e) --->
+                    Landroid/content/pm/PackageManager;->getPackageInfo(Ljava/lang/String; I)Landroid/content/pm/PackageInfo;
+               => Lg7/l;->b(Landroid/content/Context; Ljava/lang/String;)Z (0x3a) --->
+                    Landroid/content/pm/PackageManager;->getPackageInfo(Ljava/lang/String; I)Landroid/content/pm/PackageInfo;
+[Notice]  AndroidManifest Exported Components Checking 2:
+           Found "exported" components(except for Launcher) for receiving Google's "Android" actions (AndroidManifest.xml):
+                 activity => com.unikrew.faceoff.Fingerprint.FingerPrintScanner
+                  service => com.google.android.play.core.assetpacks.AssetPackExtractionService
+                 receiver => nl.xservices.plugins.ShareChooserPendingIntent
+                 receiver => com.learnium.RNDeviceInfo.RNDeviceReceiver
+------------------------------------------------------------
+AndroBugs analyzing time: 7.041 secs
+Total elapsed time: 35.722 secs

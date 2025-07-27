@@ -1,0 +1,273 @@
+*************************************************************************
+**   AndroBugs Framework - Android App Security Vulnerability Scanner  **
+**                            version: 1.0.0                           **
+**     author: Yu-Cheng Lin (@AndroBugs, http://www.AndroBugs.com)     **
+**               contact: androbugs.framework@gmail.com                **
+*************************************************************************
+Platform: Android
+Package Name: com.p3.soneridigital
+Package Version Name: 1.8.3
+Package Version Code: 85
+Min Sdk: 23
+Target Sdk: 34
+MD5   : d25c56560a87c2867a3fba42ced539e7
+SHA1  : dee213325ec4a4d3cf046b1922847deca7dbae2e
+SHA256: 6b3f9301232e4c22845766cd91aabd2a71cc107c3048930ae0f25844dfec215a
+SHA512: cce6a3a3b3237e3abf0729f912cf66a1c40b5c5e072221835fd055bb5bd08f9e8b3dfc357a87ce0b505a9a9b713ecf354e938f3abf080a00eca119b0b6bbd00a
+Analyze Signature: d0bcbaf639ac72dbf101ef0bf7c30c095764c380ed94110b120379dfd28313a83c827829a3d728c2cb9b30c484307f5d1f570c683fa98e26354a589c61d996f0
+------------------------------------------------------------------------------------------------
+[Critical] <SSL_Security> SSL Connection Checking:
+           URLs that are NOT under SSL (Total:1):
+               http://ns.adobe.com/xap/1.0/ 
+                   => Lu1/a;-><clinit>()V
+[Warning]  External Storage Accessing:
+           External storage access found (Remember DO NOT write important files to external storages):
+               => Landroidx/core/content/FileProvider;->c(Landroid/content/Context;
+                    Ljava/lang/String;)Landroidx/core/content/FileProvider$c; (0xcc) --->
+                    Landroid/os/Environment;->getExternalStorageDirectory()Ljava/io/File;
+               => Lcom/unikrew/faceoff/fingerprint/FingerprintScannerActivity;->g()V (0xaa) --->
+                    Landroid/os/Environment;->getExternalStorageDirectory()Ljava/io/File;
+               => Lyh/l;->c(Landroid/content/Context; Landroid/net/Uri;)Ljava/lang/String; (0x66) --->
+                    Landroid/os/Environment;->getExternalStorageDirectory()Ljava/io/File;
+               => Lyh/l;->c(Landroid/content/Context; Landroid/net/Uri;)Ljava/lang/String; (0x9a) --->
+                    Landroid/os/Environment;->getExternalStorageDirectory()Ljava/io/File;
+               => Lyh/l;->c(Landroid/content/Context; Landroid/net/Uri;)Ljava/lang/String; (0x110) --->
+                    Landroid/os/Environment;->getExternalStorageDirectory()Ljava/io/File;
+               => Lcom/veridiumid/sdk/fourf/camera/FourFCamera2;->saveImage([B)V (0x0) --->
+                    Landroid/os/Environment;->getExternalStorageDirectory()Ljava/io/File;
+[Warning] <Sensitive_Information> Getting ANDROID_ID:
+           This app has code getting the 64-bit number "Settings.Secure.ANDROID_ID".
+           ANDROID_ID seems a good choice for a unique device identifier. There are downsides: First, it is not 100% reliable on releases of
+           Android prior to 2.2 (Froyo).
+           Also, there has been at least one widely-observed bug in a popular handset from a major manufacturer, where every instance has
+           the same ANDROID_ID.
+           If you want to get an unique id for the device, we suggest you use "Installation" framework in the following article.
+           Please check the reference: http://android-developers.blogspot.tw/2011/03/identifying-app-installations.html
+               => Lcom/p3/soneridigital/core/network/RetrofitRequest;->d(Landroid/content/Context;)Lnj/w; (0x17c) --->
+                    Landroid/provider/Settings$Secure;->getString(Landroid/content/ContentResolver; Ljava/lang/String;)Ljava/lang/String;
+               => Lcom/unikrew/faceoff/fingerprint/Telemetry/TelemetryHelper;->getTelemetryRequest(Ljava/lang/String; Ljava/lang/String;
+                    Lcom/unikrew/faceoff/fingerprint/Telemetry/Telemetry;)Lcom/unikrew/faceoff/fingerprint/Telemetry/TelemetryRequest;
+                    (0x1c) ---> Landroid/provider/Settings$Secure;->getString(Landroid/content/ContentResolver;
+                    Ljava/lang/String;)Ljava/lang/String;
+               => Lcom/unikrew/faceoff/fingerprint/licensing/LicensingHelper;->a(Z)Lcom/unikrew/faceoff/fingerprint/licensing/b; (0x78) --->
+                    Landroid/provider/Settings$Secure;->getString(Landroid/content/ContentResolver; Ljava/lang/String;)Ljava/lang/String;
+               => Lcom/veridiumid/sdk/internal/licensing/LicensingRepository;->getDeviceId()Ljava/lang/String; (0x10) --->
+                    Landroid/provider/Settings$Secure;->getString(Landroid/content/ContentResolver; Ljava/lang/String;)Ljava/lang/String;
+               => Lee/x;->onClick(Landroid/view/View;)V (0x96) --->
+                    Landroid/provider/Settings$Secure;->getString(Landroid/content/ContentResolver; Ljava/lang/String;)Ljava/lang/String;
+               => Lw8/e;->h(Landroid/content/Context;)Z (0xc) --->
+                    Landroid/provider/Settings$Secure;->getString(Landroid/content/ContentResolver; Ljava/lang/String;)Ljava/lang/String;
+               => Lcom/p3/soneridigital/ui/settings/fragments/devicesetting/DeviceSettingFragment$b;->a(Landroid/view/View;)V (0x34) --->
+                    Landroid/provider/Settings$Secure;->getString(Landroid/content/ContentResolver; Ljava/lang/String;)Ljava/lang/String;
+               => Lcom/p3/soneridigital/ui/signupprocess/fragments/fragmenttermsandcondition/FragmentTermsAndCondition$b;->a(Lcom/ncorti/sli
+                    detoact/SlideToActView;)V (0x2e) ---> Landroid/provider/Settings$Secure;->getString(Landroid/content/ContentResolver;
+                    Ljava/lang/String;)Ljava/lang/String;
+               => Lcom/p3/soneridigital/ui/smsotp/fragmentsmsotp/FragmentSMSOTP$a;->a(Ljava/lang/String;)V (0x38) --->
+                    Landroid/provider/Settings$Secure;->getString(Landroid/content/ContentResolver; Ljava/lang/String;)Ljava/lang/String;
+               => Lcom/veridiumid/sdk/analytics/LoggingVeridium;-><init>(Landroid/content/Context;)V (0x26) --->
+                    Landroid/provider/Settings$Secure;->getString(Landroid/content/ContentResolver; Ljava/lang/String;)Ljava/lang/String;
+               => Lcom/p3/soneridigital/ui/signupprocess/fragments/fargmentbiometric/FragmentSignUpBiometric;->o(Ljb/q;)V (0x60) --->
+                    Landroid/provider/Settings$Secure;->getString(Landroid/content/ContentResolver; Ljava/lang/String;)Ljava/lang/String;
+               => Lcom/p3/soneridigital/ui/dashboard/DashboardParallaxActivity;->S0(I Ljava/lang/String;)V (0x54) --->
+                    Landroid/provider/Settings$Secure;->getString(Landroid/content/ContentResolver; Ljava/lang/String;)Ljava/lang/String;
+               => Lcom/p3/soneridigital/ui/forgetpassword/ForgotPasswordActivity;->onCreate(Landroid/os/Bundle;)V (0x68) --->
+                    Landroid/provider/Settings$Secure;->getString(Landroid/content/ContentResolver; Ljava/lang/String;)Ljava/lang/String;
+               => Lcom/p3/soneridigital/ui/forgetusername/ForgotUsernameActivity;->onCreate(Landroid/os/Bundle;)V (0x68) --->
+                    Landroid/provider/Settings$Secure;->getString(Landroid/content/ContentResolver; Ljava/lang/String;)Ljava/lang/String;
+               => Lcom/p3/soneridigital/ui/login/LoginActivity;->onCreate(Landroid/os/Bundle;)V (0xe2) --->
+                    Landroid/provider/Settings$Secure;->getString(Landroid/content/ContentResolver; Ljava/lang/String;)Ljava/lang/String;
+               => Lcom/p3/soneridigital/ui/signupprocess/SignUpProcessActivity;->onCreate(Landroid/os/Bundle;)V (0x68) --->
+                    Landroid/provider/Settings$Secure;->getString(Landroid/content/ContentResolver; Ljava/lang/String;)Ljava/lang/String;
+               => Lcom/p3/soneridigital/ui/splash/SplashActivity;->onCreate(Landroid/os/Bundle;)V (0x58c) --->
+                    Landroid/provider/Settings$Secure;->getString(Landroid/content/ContentResolver; Ljava/lang/String;)Ljava/lang/String;
+[Warning] <WebView> WebView Local File Access Attacks Checking:
+           Found "setAllowFileAccess(true)" or not set(enabled by default) in WebView. The attackers could inject malicious script into
+           WebView and exploit the opportunity to access local resources. This can be mitigated or prevented by disabling local file system
+           access. (It is enabled by default)
+           Note that this enables or disables file system access only. Assets and resources are still accessible using file:///android_asset
+           and file:///android_res.
+           The attackers can use "mWebView.loadUrl("file:///data/data/[Your_Package_Name]/[File]");" to access app's local file.
+           Reference: (1)https://labs.mwrinfosecurity.com/blog/2012/04/23/adventures-with-android-webviews/
+                      (2)http://developer.android.com/reference/android/webkit/WebSettings.html#setAllowFileAccess(boolean)
+           Please add or modify "yourWebView.getSettings().setAllowFileAccess(false)" to your WebView:
+               Lcom/p3/soneridigital/ui/notification/NotificationActivity;->onCreate(Landroid/os/Bundle;)V
+               Lcom/p3/soneridigital/ui/promotions/PromoActivity;->init()V
+               Lhd/y0;->onClick(Landroid/view/View;)V
+               Lmd/k0;->a(Landroid/view/View;)V
+               Lmd/l0;->a(Landroid/view/View;)V
+               Lrd/a$i;->a(Landroid/view/View;)V
+[Warning] <WebView> WebView Potential XSS Attacks Checking:
+           Found "setJavaScriptEnabled(true)" in WebView, which could exposed to potential XSS attacks. Please check the web page code
+           carefully and sanitize the output:
+               => Lhd/y0;->onClick(Landroid/view/View;)V (0x154) ---> Landroid/webkit/WebSettings;->setJavaScriptEnabled(Z)V
+               => Lmd/k0;->a(Landroid/view/View;)V (0x128) ---> Landroid/webkit/WebSettings;->setJavaScriptEnabled(Z)V
+               => Lmd/l0;->a(Landroid/view/View;)V (0xea) ---> Landroid/webkit/WebSettings;->setJavaScriptEnabled(Z)V
+               => Lrd/a$i;->a(Landroid/view/View;)V (0x100) ---> Landroid/webkit/WebSettings;->setJavaScriptEnabled(Z)V
+               => Lcom/p3/soneridigital/ui/notification/NotificationActivity;->onCreate(Landroid/os/Bundle;)V (0x8e2) --->
+                    Landroid/webkit/WebSettings;->setJavaScriptEnabled(Z)V
+               => Lcom/p3/soneridigital/ui/promotions/PromoActivity;->init()V (0x5e) --->
+                    Landroid/webkit/WebSettings;->setJavaScriptEnabled(Z)V
+[Notice] <Command> Executing "root" or System Privilege Checking:
+           The app may has the code checking for "root" permission, mounting filesystem operations or monitoring system:
+               Lcom/p3/soneridigital/ui/splash/SplashActivity;->onCreate(Landroid/os/Bundle;)V  => '/system/bin/su'
+               Lcom/p3/soneridigital/ui/splash/SplashActivity;->onCreate(Landroid/os/Bundle;)V  => 'su'
+               Lcom/veridiumid/sdk/model/help/AndroidHelper;->checkRootMethod2()Z  => '/system/bin/failsafe/su'
+               Lcom/p3/soneridigital/ui/splash/SplashActivity;->onCreate(Landroid/os/Bundle;)V  => '/system/bin/failsafe/su'
+               Lcom/veridiumid/sdk/model/help/AndroidHelper;->checkRootMethod4(Landroid/content/Context;)Z  => 'su'
+               Lya/c;-><clinit>()V  => 'su'
+               Lcom/veridiumid/sdk/model/help/AndroidHelper;->checkRootMethod3()Z  => 'su'
+               Lcom/veridiumid/sdk/model/help/AndroidHelper;->checkRootMethod2()Z  => '/system/bin/su'
+               Lcom/veridiumid/sdk/model/help/AndroidHelper;->findBinary(Ljava/lang/String;)Z  => '/system/bin/'
+               Lcom/veridiumid/sdk/model/help/AndroidHelper;->findBinary(Ljava/lang/String;)Z  => '/system/bin/failsafe/'
+[Notice] <Database><#CVE-2011-3901#> Android SQLite Databases Vulnerability Checking:
+           This app is using Android SQLite databases but it's "NOT" suffering from SQLite Journal Information Disclosure Vulnerability.
+[Notice]  File Unsafe Delete Checking:
+           Everything you delete may be recovered by any user or attacker, especially rooted devices.
+           Please make sure do not use "file.delete()" to delete essential files.
+           Check this video: https://www.youtube.com/watch?v=tGw1fxUD-uY
+               => Landroidx/core/content/FileProvider;->delete(Landroid/net/Uri; Ljava/lang/String; [Ljava/lang/String;)I (0xc) --->
+                    Ljava/io/File;->delete()Z
+               => Landroidx/profileinstaller/ProfileInstallReceiver;->onReceive(Landroid/content/Context; Landroid/content/Intent;)V (0xf4)
+                    ---> Ljava/io/File;->delete()Z
+               => Landroidx/profileinstaller/a;->a(Ljava/io/File;)Z (0x4a) ---> Ljava/io/File;->delete()Z
+               => Landroidx/profileinstaller/d$b;->b(Ljava/io/File;)V (0x0) ---> Ljava/io/File;->delete()Z
+               => Lb1/p;->c(Landroid/content/Context; Ljava/io/InputStream;)Landroid/graphics/Typeface; (0x1c) --->
+                    Ljava/io/File;->delete()Z
+               => Lb1/p;->c(Landroid/content/Context; Ljava/io/InputStream;)Landroid/graphics/Typeface; (0x34) --->
+                    Ljava/io/File;->delete()Z
+               => Lb1/p;->c(Landroid/content/Context; Ljava/io/InputStream;)Landroid/graphics/Typeface; (0x3e) --->
+                    Ljava/io/File;->delete()Z
+               => Lb1/p;->c(Landroid/content/Context; Ljava/io/InputStream;)Landroid/graphics/Typeface; (0x46) --->
+                    Ljava/io/File;->delete()Z
+               => Lb1/p;->d(Landroid/content/Context; Landroid/content/res/Resources; I Ljava/lang/String; I)Landroid/graphics/Typeface;
+                    (0x1c) ---> Ljava/io/File;->delete()Z
+               => Lb1/p;->d(Landroid/content/Context; Landroid/content/res/Resources; I Ljava/lang/String; I)Landroid/graphics/Typeface;
+                    (0x34) ---> Ljava/io/File;->delete()Z
+               => Lb1/p;->d(Landroid/content/Context; Landroid/content/res/Resources; I Ljava/lang/String; I)Landroid/graphics/Typeface;
+                    (0x3e) ---> Ljava/io/File;->delete()Z
+               => Lb1/p;->d(Landroid/content/Context; Landroid/content/res/Resources; I Ljava/lang/String; I)Landroid/graphics/Typeface;
+                    (0x46) ---> Ljava/io/File;->delete()Z
+               => Lb2/a;->a(Landroid/content/Context;)V (0xe6) ---> Ljava/io/File;->delete()Z
+               => Lb2/a;->a(Landroid/content/Context;)V (0x14e) ---> Ljava/io/File;->delete()Z
+               => Lb2/c;->e(Ljava/util/zip/ZipFile; Ljava/util/zip/ZipEntry; Lb2/c$a; Ljava/lang/String;)V (0x11e) --->
+                    Ljava/io/File;->delete()Z
+               => Lb2/c;->e(Ljava/util/zip/ZipFile; Ljava/util/zip/ZipEntry; Lb2/c$a; Ljava/lang/String;)V (0x1e8) --->
+                    Ljava/io/File;->delete()Z
+               => Lb2/c;->G()Ljava/util/ArrayList; (0xe0) ---> Ljava/io/File;->delete()Z
+               => Lb2/c;->G()Ljava/util/ArrayList; (0x2f2) ---> Ljava/io/File;->delete()Z
+               => Lb7/g3;->getWritableDatabase()Landroid/database/sqlite/SQLiteDatabase; (0x54) ---> Ljava/io/File;->delete()Z
+               => Lb7/i;->getWritableDatabase()Landroid/database/sqlite/SQLiteDatabase; (0xc4) ---> Ljava/io/File;->delete()Z
+               => Lb9/f;->g(Ljava/io/File;)V (0x32) ---> Ljava/io/File;->delete()Z
+               => Lcom/google/android/gms/internal/gtm/zzcd;->getWritableDatabase()Landroid/database/sqlite/SQLiteDatabase; (0x68) --->
+                    Ljava/io/File;->delete()Z
+               => Lt2/a;->Q(Ljava/io/File; J)Lt2/a; (0x40) ---> Ljava/io/File;->delete()Z
+               => Lt2/a;->m(Ljava/io/File;)V (0xc) ---> Ljava/io/File;->delete()Z
+               => Lt2/a;->V()V (0x194) ---> Ljava/io/File;->delete()Z
+               => Lt2/a;->c0()V (0x84) ---> Ljava/io/File;->delete()Z
+               => Lt2/c;->a(Ljava/io/File;)V (0x2a) ---> Ljava/io/File;->delete()Z
+               => Lw8/j0;->c(Ljava/util/concurrent/Executor;)Lf7/b0; (0xb2) ---> Ljava/io/File;->delete()Z
+               => Lw8/p;->call()Ljava/lang/Object; (0x62) ---> Ljava/io/File;->delete()Z
+               => Lw8/p;->call()Ljava/lang/Object; (0xa2) ---> Ljava/io/File;->delete()Z
+               => Lw8/t;->b(Lw8/t;)Lf7/b0; (0xe0) ---> Ljava/io/File;->delete()Z
+               => Lw8/t;->c(Z)V (0x56a) ---> Ljava/io/File;->delete()Z
+               => Lw8/x;->call()Ljava/lang/Object; (0x14) ---> Ljava/io/File;->delete()Z
+               => Lw8/y;->call()Ljava/lang/Object; (0x8a) ---> Ljava/io/File;->delete()Z
+               => Lb1/j;->a(Landroid/content/Context; La1/e$c; Landroid/content/res/Resources; I)Landroid/graphics/Typeface; (0x48) --->
+                    Ljava/io/File;->delete()Z
+               => Lb1/j;->a(Landroid/content/Context; La1/e$c; Landroid/content/res/Resources; I)Landroid/graphics/Typeface; (0x6c) --->
+                    Ljava/io/File;->delete()Z
+               => Lb1/j;->a(Landroid/content/Context; La1/e$c; Landroid/content/res/Resources; I)Landroid/graphics/Typeface; (0x74) --->
+                    Ljava/io/File;->delete()Z
+               => Lb1/j;->a(Landroid/content/Context; La1/e$c; Landroid/content/res/Resources; I)Landroid/graphics/Typeface; (0x82) --->
+                    Ljava/io/File;->delete()Z
+               => Lb1/j;->a(Landroid/content/Context; La1/e$c; Landroid/content/res/Resources; I)Landroid/graphics/Typeface; (0x8a) --->
+                    Ljava/io/File;->delete()Z
+               => Lb1/k;->a(Landroid/content/Context; La1/e$c; Landroid/content/res/Resources; I)Landroid/graphics/Typeface; (0x5a) --->
+                    Ljava/io/File;->delete()Z
+               => Lb1/k;->a(Landroid/content/Context; La1/e$c; Landroid/content/res/Resources; I)Landroid/graphics/Typeface; (0xae) --->
+                    Ljava/io/File;->delete()Z
+               => Lb1/k;->a(Landroid/content/Context; La1/e$c; Landroid/content/res/Resources; I)Landroid/graphics/Typeface; (0xdc) --->
+                    Ljava/io/File;->delete()Z
+               => Lcom/android/volley/toolbox/d;->d()V (0xba) ---> Ljava/io/File;->delete()Z
+               => Lcom/android/volley/toolbox/d;->e()V (0x82) ---> Ljava/io/File;->delete()Z
+               => Lcom/android/volley/toolbox/d;->f(Ljava/lang/String; Ln2/a$a;)V (0xca) ---> Ljava/io/File;->delete()Z
+               => Lcom/android/volley/toolbox/d;->l(Ljava/lang/String;)V (0xa) ---> Ljava/io/File;->delete()Z
+               => Lcom/veridiumid/sdk/analytics/LoggingVeridium;->deleteEmptyRecursive(Ljava/io/File;)V (0x4c) --->
+                    Ljava/io/File;->delete()Z
+               => Lcom/veridiumid/sdk/analytics/LoggingVeridium;->removeLogsRecursive(Ljava/io/File;)V (0xf0) ---> Ljava/io/File;->delete()Z
+               => Lr/l;->then(Lf7/j;)Ljava/lang/Object; (0xe2) ---> Ljava/io/File;->delete()Z
+               => Lvj/a;->c(Ljava/io/File;)V (0x3e) ---> Ljava/io/File;->delete()Z
+               => Lvj/a;->f(Ljava/io/File;)V (0xa) ---> Ljava/io/File;->delete()Z
+[Notice] <Debug><Hacker> Codes for Checking Android Debug Mode:
+           Found codes for checking "ApplicationInfo.FLAG_DEBUGGABLE" in AndroidManifest.xml:
+               => Lq4/d;->f (Landroid/content/Context; Landroid/graphics/Bitmap; F)Z
+               => Lq4/a;->f (Landroid/content/Context; Landroid/graphics/Bitmap; F)Z
+               => Ls5/i;->b (I)Z
+               => Lq4/b;->f (Landroid/content/Context; Landroid/graphics/Bitmap; F)Z
+[Notice] <Hacker> APK Installing Source Checking:
+           This app has code checking APK installer sources(e.g. from Google Play, from Amazon, etc.). It might be used to check for whether
+           the app is hacked by the attackers.
+               => Lcj/f;->e(Landroid/content/Context;)Ljava/lang/String; (0x10) --->
+                    Landroid/content/pm/PackageManager;->getInstallerPackageName(Ljava/lang/String;)Ljava/lang/String;
+               => Lw8/h0;->d()Ljava/lang/String; (0x26) --->
+                    Landroid/content/pm/PackageManager;->getInstallerPackageName(Ljava/lang/String;)Ljava/lang/String;
+               => Lcom/google/android/gms/internal/gtm/zzcf;->zzd()V (0x42) --->
+                    Landroid/content/pm/PackageManager;->getInstallerPackageName(Ljava/lang/String;)Ljava/lang/String;
+               => Lb7/f3;->l()V (0x5a) --->
+                    Landroid/content/pm/PackageManager;->getInstallerPackageName(Ljava/lang/String;)Ljava/lang/String;
+[Notice] <KeyStore><Hacker> Possible KeyStore File Location:
+           BKS possible keystore file:
+               res/raw/cert_uat_mob_2022_2023.der
+               res/raw/certificate_prod.der
+               res/raw/uatcertificate.der
+               stamp-cert-sha256
+[Notice] <KeyStore><Hacker> KeyStore Protection Information:
+           The Keystores below are "protected" by password and seem using SSL-pinning (Total: 2). You can use "Portecle" tool to manage the
+           certificates in the KeyStore:
+               => Lcom/veridiumid/sdk/internal/licensing/LicensingRepository;->setupServiceClientCertificate(Ljava/lang/String;)V (0x3e)
+                    ---> Ljava/security/KeyStore;->load(Ljava/io/InputStream; [C)V
+               => Lcom/veridiumid/sdk/security/SecurityUtils;->loadPKCS12Keystore(Ljava/io/InputStream; [C)Ljava/security/KeyStore; (0xc)
+                    ---> Ljava/security/KeyStore;->load(Ljava/io/InputStream; [C)V
+[Notice] <Hacker> Code Setting Preventing Screenshot Capturing:
+           This app has code setting the preventing screenshot capturing.
+           Example: getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+           It is used by the developers to protect the app:
+               => Lcom/veridiumid/sdk/support/base/VeridiumBaseActivity;->initWindow(Landroid/view/Window;)V (0x24) --->
+                    Landroid/view/Window;->setFlags(I I)V
+               => Lcom/p3/soneridigital/ui/login/LoginActivity;->onCreate(Landroid/os/Bundle;)V (0x12) --->
+                    Landroid/view/Window;->setFlags(I I)V
+[Notice] <Signature><Hacker> Getting Signature Code Checking:
+           This app has code checking the package signature in the code. It might be used to check for whether the app is hacked by the
+           attackers.
+               => Landroidx/emoji2/text/d$a;->a(Landroid/content/pm/PackageManager; Ljava/lang/String;)[Landroid/content/pm/Signature; (0x4)
+                    ---> Landroid/content/pm/PackageManager;->getPackageInfo(Ljava/lang/String; I)Landroid/content/pm/PackageInfo;
+               => Lcom/google/android/libraries/places/internal/zzfu;->zza(Landroid/content/pm/PackageManager;
+                    Ljava/lang/String;)Ljava/lang/String; (0x6) ---> Landroid/content/pm/PackageManager;->getPackageInfo(Ljava/lang/String;
+                    I)Landroid/content/pm/PackageInfo;
+               => Ld6/j;->a(Landroid/content/Context; I)Z (0x20) ---> Landroid/content/pm/PackageManager;->getPackageInfo(Ljava/lang/String;
+                    I)Landroid/content/pm/PackageInfo;
+               => Lg1/d;->a(Landroid/content/Context; Lg1/e;)Lg1/k; (0x44) --->
+                    Landroid/content/pm/PackageManager;->getPackageInfo(Ljava/lang/String; I)Landroid/content/pm/PackageInfo;
+               => Lj8/g;-><init>(Landroid/content/Context;)V (0x40) --->
+                    Landroid/content/pm/PackageManager;->getPackageInfo(Ljava/lang/String; I)Landroid/content/pm/PackageInfo;
+               => Ls5/h;->b(Landroid/content/Context; I)I (0x20e) --->
+                    Landroid/content/pm/PackageManager;->getPackageInfo(Ljava/lang/String; I)Landroid/content/pm/PackageInfo;
+               => Ls5/i;->b(I)Z (0x1ee) ---> Landroid/content/pm/PackageManager;->getPackageInfo(Ljava/lang/String;
+                    I)Landroid/content/pm/PackageInfo;
+               => Landroidx/emoji2/text/d$c;->a(Landroid/content/pm/PackageManager; Ljava/lang/String;)[Landroid/content/pm/Signature; (0x4)
+                    ---> Landroid/content/pm/PackageManager;->getPackageInfo(Ljava/lang/String; I)Landroid/content/pm/PackageInfo;
+[Notice]  Native Library Loading Checking:
+           Native library loading codes(System.loadLibrary(...)) found:
+               [libimage_processing_util_jni.so]
+               => Landroidx/camera/core/ImageProcessingUtil;-><clinit>()V (0x4) ---> Ljava/lang/System;->loadLibrary(Ljava/lang/String;)V
+               [libnative-lib.so]
+               => Lcom/p3/soneridigital/core/network/RetrofitRequest;-><clinit>()V (0x4) --->
+                    Ljava/lang/System;->loadLibrary(Ljava/lang/String;)V
+               [libnative-lib.so]
+               => Lcom/p3/soneridigital/utils/FrontEngine;-><clinit>()V (0x4) ---> Ljava/lang/System;->loadLibrary(Ljava/lang/String;)V
+               [libmodpng.so]
+               => Lcom/shockwave/pdfium/PdfiumCore;-><clinit>()V (0x4) ---> Ljava/lang/System;->loadLibrary(Ljava/lang/String;)V
+               [libmodft2.so]
+------------------------------------------------------------
+AndroBugs analyzing time: 16.212 secs
+Total elapsed time: 74.795 secs

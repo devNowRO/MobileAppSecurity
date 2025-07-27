@@ -1,0 +1,288 @@
+*************************************************************************
+**   AndroBugs Framework - Android App Security Vulnerability Scanner  **
+**                            version: 1.0.0                           **
+**     author: Yu-Cheng Lin (@AndroBugs, http://www.AndroBugs.com)     **
+**               contact: androbugs.framework@gmail.com                **
+*************************************************************************
+Platform: Android
+Package Name: com.silkbank.silkbankretail
+Package Version Name: 1.4.1
+Package Version Code: 57
+Min Sdk: 19
+Target Sdk: 33
+MD5   : aca74e3d2b2cd8b160e87c3bfb90941b
+SHA1  : e30232380c3e89216af9ce30db39d60add63e36b
+SHA256: ca596da35136a929e82b3eb37ec931012019fd98b9a85ea61411daf65f4e9ff0
+SHA512: 3a9071b65c23387ea12df3a6be13b4fcd7bc4d9afc3d56f91253450abaee19e493f60b85419c0fec5d91462bfb4710f428f761d308dd83acd258a1f801274ebd
+Analyze Signature: 664ecf6dada034c135a092f98245c39edd34a0fd7c1e2ebdeac8e0a0d7095adb46c3bfd494398f5389e5978fcb6dc7e7fe83f6a0ae410019484bbb18cc7b4d87
+------------------------------------------------------------------------------------------------
+[Critical] <Command> Runtime Command Checking:
+           This app is using critical function 'Runtime.getRuntime().exec("...")'.
+           Please confirm these following code secions are not harmful:
+               => Lcom/gemalto/idp/mobile/authentication/mode/face/ui/internal/utils/logs/MyLog;->printLogToFileRedirect(Landroid/content/Co
+                    ntext; Ljava/lang/String;)V (0x62) ---> Ljava/lang/Runtime;->exec(Ljava/lang/String;)Ljava/lang/Process;
+[Critical] <KeyStore><Hacker> KeyStore Protection Checking:
+           The Keystores below seem using "byte array" or "hard-coded cert info" to do SSL pinning (Total: 3). Please manually check:
+               => Laggggg/llllww;->bÐÐÐÐ041DÐÐÐ()Ljava/security/KeyStore; (0x18) --->
+                    Ljava/security/KeyStore;->load(Ljava/io/InputStream; [C)V
+               => Laggggg/wwllww;->bÐÐ041D041DÐ041DÐÐ()Ljava/security/KeyStore; (0x18) --->
+                    Ljava/security/KeyStore;->load(Ljava/io/InputStream; [C)V
+               => Lcom/kony/sdkcommons/Network/NetworkCore/KNYSSLSocketFactory;->getBundledCertsKeyStore()Ljava/security/KeyStore; (0x12)
+                    ---> Ljava/security/KeyStore;->load(Ljava/io/InputStream; [C)V
+[Critical]  AndroidManifest ContentProvider Exported Checking:
+           We strongly suggest you explicitly specify the "exported" attribute (AndroidManifest.xml).
+           For Android "android:targetSdkVersion" < 17, the exported value of ContentProvider is "true" by default.
+           For Android "android:targetSdkVersion" >= 17, the exported value of ContentProvider is "false" by default.
+           Which means if you do not explicitly set the "android:exported", you will expose your ContentProvider to Android < 4.2 devices.
+           Even if you set the provider the permission with [protectionalLevel="normal"], other apps still cannot access it on Android >=
+           4.2 devices because of the default constraint.
+           Please make sure to set exported to "true" if you initially want other apps to use it (including protected by "signature"
+           protectionalLevel), and set to "false" if your do not want to.
+           Please still specify the "exported" to "true" if you have already set the corresponding "permission", "writePermission" or
+           "readPermission" to "signature" protectionLevel or higher
+           because other apps signed by the same signature in Android >= 4.2 devices cannot access it.
+           Reference: http://developer.android.com/guide/topics/manifest/provider-element.html#exported
+           Vulnerable ContentProvider Case Example:
+             (1)https://www.nowsecure.com/mobile-security/ebay-android-content-provider-injection-vulnerability.html
+             (2)http://blog.trustlook.com/2013/10/23/ebay-android-content-provider-information-disclosure-vulnerability/
+             (3)http://www.wooyun.org/bugs/wooyun-2010-039169
+                 provider => com.silkbank.silkbankretail.SilkmobileSearchSuggestionProvider
+[Critical] <SSL_Security> SSL Connection Checking:
+           URLs that are NOT under SSL (Total:2):
+               http://javax.xml.XMLConstants/feature/secure-processing
+                   => Laggggg/wswsss$swswss;->b043F043F043F043F043FÐ¿Ð¿Ð¿(Laggggg/wswsss$swswss;)V
+                   => Laggggg/wwswsw;->b043FÐ¿Ð¿Ð¿Ð¿043F043F043F(Lcom/konylabs/vmintf/KonyJavaScriptVM;)Z
+               http://xmlpull.org/v1/doc/features.html#indent-output
+                   => Laggggg/wswsss$swswss;->b043F043F043F043F043FÐ¿Ð¿Ð¿(Laggggg/wswsss$swswss;)V
+[Warning]  External Storage Accessing:
+           External storage access found (Remember DO NOT write important files to external storages):
+               => Laggggg/wsswww;->b041FÐÐ041F041FÐ041FÐ()Ljava/lang/String; (0x0) --->
+                    Landroid/os/Environment;->getExternalStorageDirectory()Ljava/io/File;
+               => Laggggg/wswsss$swswss;->b043F043F043F043F043FÐ¿Ð¿Ð¿(Laggggg/wswsss$swswss;)V (0x88) --->
+                    Landroid/os/Environment;->getExternalStorageDirectory()Ljava/io/File;
+               => Laggggg/wswsss$swswss;->b043F043F043F043F043FÐ¿Ð¿Ð¿(Laggggg/wswsss$swswss;)V (0xbe) --->
+                    Landroid/os/Environment;->getExternalStorageDirectory()Ljava/io/File;
+               => Landroidx/core/content/FileProvider;->parsePathStrategy(Landroid/content/Context;
+                    Ljava/lang/String;)Landroidx/core/content/FileProvider$PathStrategy; (0xce) --->
+                    Landroid/os/Environment;->getExternalStorageDirectory()Ljava/io/File;
+               => Landroidx/core/os/EnvironmentCompat;->getStorageState(Ljava/io/File;)Ljava/lang/String; (0x1e) --->
+                    Landroid/os/Environment;->getExternalStorageDirectory()Ljava/io/File;
+               => Lcom/kony/CaptureSignature;->onCreate(Landroid/os/Bundle;)V (0x296) --->
+                    Landroid/os/Environment;->getExternalStorageDirectory()Ljava/io/File;
+               => Laggggg/ssssoo;->bÐÐ0418ÐÐ04180418Ð(Ljava/lang/String;)V (0x8a) --->
+                    Landroid/os/Environment;->getExternalStorageDirectory()Ljava/io/File;
+               => Laggggg/dddyyd;-><init>(Lcom/konylabs/vm/LuaTable;)V (0x16c) --->
+                    Landroid/os/Environment;->getExternalStorageDirectory()Ljava/io/File;
+               => Laggggg/dddyyd;-><init>(Lcom/konylabs/vm/LuaTable; Lcom/konylabs/vm/LuaTable; Lcom/konylabs/vm/LuaTable;)V (0x37c) --->
+                    Landroid/os/Environment;->getExternalStorageDirectory()Ljava/io/File;
+               => Laggggg/dddyyd;->bÑ04460446Ñ0446Ñ04460446()V (0xd4) --->
+                    Landroid/os/Environment;->getExternalStorageDirectory()Ljava/io/File;
+[Warning]  AndroidManifest Exported Components Checking:
+           Found "exported" components(except for Launcher) for receiving outside applications' actions (AndroidManifest.xml).
+           These components can be initilized by other apps. You should add or modify the attribute to [exported="false"] if you don't want
+           to.
+           You can also protect it with a customized permission with "signature" or higher protectionLevel and specify in
+           "android:permission" attribute.
+                 receiver => com.konylabs.api.sms.SMSBroadcastReceiver
+[Warning] <Sensitive_Information> Getting IMEI and Device ID:
+           This app has code getting the "device id(IMEI)" but there are problems with this "TelephonyManager.getDeviceId()" approach.
+           1.Non-phones: Wifi-only devices or music players that don't have telephony hardware just don't have this kind of unique
+           identifier.
+           2.Persistence: On devices which do have this, it persists across device data wipes and factory resets. It's not clear at all if,
+           in this situation, your app should regard this as the same device.
+           3.Privilege:It requires READ_PHONE_STATE permission, which is irritating if you don't otherwise use or need telephony.
+           4.Bugs: We have seen a few instances of production phones for which the implementation is buggy and returns garbage, for example
+           zeros or asterisks.
+           If you want to get an unique id for the device, we suggest you use "Installation" framework in the following article.
+           Please check the reference: http://android-developers.blogspot.tw/2011/03/identifying-app-installations.html
+               => Lcom/kony/cms/client/MetricsUtility;->retrieveDeviceID()Ljava/lang/String; (0x18) --->
+                    Landroid/telephony/TelephonyManager;->getDeviceId()Ljava/lang/String;
+               => Laggggg/hhmhhh;->b043B043B043BÐ»Ð»043BÐ»Ð»()Ljava/lang/String; (0x54) --->
+                    Landroid/telephony/TelephonyManager;->getDeviceId()Ljava/lang/String;
+               => Laggggg/hhmhhh;->b043B043BÐ»Ð»043B043BÐ»Ð»()Ljava/lang/String; (0x2e) --->
+                    Landroid/telephony/TelephonyManager;->getDeviceId()Ljava/lang/String;
+[Warning] <Sensitive_Information> Getting ANDROID_ID:
+           This app has code getting the 64-bit number "Settings.Secure.ANDROID_ID".
+           ANDROID_ID seems a good choice for a unique device identifier. There are downsides: First, it is not 100% reliable on releases of
+           Android prior to 2.2 (Froyo).
+           Also, there has been at least one widely-observed bug in a popular handset from a major manufacturer, where every instance has
+           the same ANDROID_ID.
+           If you want to get an unique id for the device, we suggest you use "Installation" framework in the following article.
+           Please check the reference: http://android-developers.blogspot.tw/2011/03/identifying-app-installations.html
+               => Lcom/kony/cms/client/MetricsUtility;->getAndroidId()Ljava/lang/String; (0x10) --->
+                    Landroid/provider/Settings$Secure;->getString(Landroid/content/ContentResolver; Ljava/lang/String;)Ljava/lang/String;
+               => Lcom/kony/cms/client/MetricsUtility;->getDeviceIDfromSerialOrContentResolver()Ljava/lang/String; (0x28) --->
+                    Landroid/provider/Settings$Secure;->getString(Landroid/content/ContentResolver; Ljava/lang/String;)Ljava/lang/String;
+               => Lcom/kony/logger/LoggerEngine/LogStatement;-><clinit>()V (0x7c) --->
+                    Landroid/provider/Settings$Secure;->getString(Landroid/content/ContentResolver; Ljava/lang/String;)Ljava/lang/String;
+               => Laggggg/hhmhhh$hmmhhh;->getTable(Ljava/lang/Object;)Ljava/lang/Object; (0x104) --->
+                    Landroid/provider/Settings$Secure;->getString(Landroid/content/ContentResolver; Ljava/lang/String;)Ljava/lang/String;
+[Warning] <SSL_Security> SSL Certificate Verification Checking:
+           Please make sure this app has the conditions to check the validation of SSL Certificate. If it's not properly checked, it MAY
+           allows self-signed, expired or mismatch CN certificates for SSL connection.
+           This is a critical vulnerability and allows attackers to do MITM attacks without your knowledge.
+           If you are transmitting users' username or password, these sensitive information may be leaking.
+           Reference:
+           (1)OWASP Mobile Top 10 doc: https://www.owasp.org/index.php/Mobile_Top_10_2014-M3
+           (2)Android Security book: http://goo.gl/BFb65r
+           (3)https://www.securecoding.cert.org/confluence/pages/viewpage.action?pageId=134807561
+           This vulnerability is much more severe than Apple's "goto fail" vulnerability: http://goo.gl/eFlovw
+           Please do not try to create a "X509Certificate" and override "checkClientTrusted", "checkServerTrusted", and "getAcceptedIssuers"
+           functions with blank implementation.
+           We strongly suggest you use the existing API instead of creating your own X509Certificate class.
+           Please modify or remove these vulnerable code:
+               --------------------------------------------------
+               [Maybe Vulnerable (Please manually confirm)]
+               => Lcom/kony/sdkcommons/Network/NetworkCore/KNYSSLSocketFactory$CustomTrustManager;
+                     -> used by:
+                    Lcom/kony/sdkcommons/Network/NetworkCore/KNYSSLSocketFactory;->loadTrustManagers()[Ljavax/net/ssl/TrustManager;
+               => Laggggg/llllww$lwllww;
+                     -> used by: Laggggg/llllww;->b041D041D041DÐ041DÐÐÐ()[Ljavax/net/ssl/TrustManager;
+               => Laggggg/wwllww$wlwlww;
+                     -> used by: Laggggg/wwllww;->b041DÐÐÐ041D041DÐÐ()[Ljavax/net/ssl/TrustManager;
+[Notice] <Database><#CVE-2011-3901#> Android SQLite Databases Vulnerability Checking:
+           This app is using Android SQLite databases but it's "NOT" suffering from SQLite Journal Information Disclosure Vulnerability.
+[Notice]  File Unsafe Delete Checking:
+           Everything you delete may be recovered by any user or attacker, especially rooted devices.
+           Please make sure do not use "file.delete()" to delete essential files.
+           Check this video: https://www.youtube.com/watch?v=tGw1fxUD-uY
+               => Laggggg/lllwwl;->b043DÐ½Ð½Ð½Ð½043DÐ½Ð½(Laggggg/lwwlwl$wwwlwl;)V (0xb4) ---> Ljava/io/File;->delete()Z
+               => Laggggg/mmnmmm;->bÐ¤Ð¤0424Ð¤Ð¤0424Ð¤Ð¤(Ljava/io/File;)Z (0x1e) ---> Ljava/io/File;->delete()Z
+               => Laggggg/mmnmmm;->bÐ¤Ð¤0424Ð¤Ð¤0424Ð¤Ð¤(Ljava/io/File;)Z (0x84) ---> Ljava/io/File;->delete()Z
+               => Laggggg/mmnmmm;->bÐ¤Ð¤0424Ð¤Ð¤0424Ð¤Ð¤(Ljava/io/File;)Z (0x9c) ---> Ljava/io/File;->delete()Z
+               => Laggggg/wswsss$swswss;->b043F043F043F043F043FÐ¿Ð¿Ð¿(Laggggg/wswsss$swswss;)V (0x22a) ---> Ljava/io/File;->delete()Z
+               => Laggggg/wwwwws;->bÐ¿Ð¿043FÐ¿Ð¿043FÐ¿043F(Ljava/lang/String;)Z (0xfe) ---> Ljava/io/File;->delete()Z
+               => Laggggg/xvvxxv;->b042BÐ«042BÐ«Ð«Ð«Ð«042B()V (0x6c) ---> Ljava/io/File;->delete()Z
+               => Laggggg/xvvxxv;->bÐ«042B042BÐ«Ð«Ð«Ð«042B()V (0x3c) ---> Ljava/io/File;->delete()Z
+               => Laggggg/xvvxxv;->bÐ«042B042BÐ«Ð«Ð«Ð«042B()V (0x7e) ---> Ljava/io/File;->delete()Z
+               => Landroidx/core/content/FileProvider;->delete(Landroid/net/Uri; Ljava/lang/String; [Ljava/lang/String;)I (0xc) --->
+                    Ljava/io/File;->delete()Z
+               => Landroidx/core/graphics/TypefaceCompatBaseImpl;->createFromInputStream(Landroid/content/Context;
+                    Ljava/io/InputStream;)Landroid/graphics/Typeface; (0x1c) ---> Ljava/io/File;->delete()Z
+               => Landroidx/core/graphics/TypefaceCompatBaseImpl;->createFromInputStream(Landroid/content/Context;
+                    Ljava/io/InputStream;)Landroid/graphics/Typeface; (0x34) ---> Ljava/io/File;->delete()Z
+               => Landroidx/core/graphics/TypefaceCompatBaseImpl;->createFromInputStream(Landroid/content/Context;
+                    Ljava/io/InputStream;)Landroid/graphics/Typeface; (0x3e) ---> Ljava/io/File;->delete()Z
+               => Landroidx/core/graphics/TypefaceCompatBaseImpl;->createFromInputStream(Landroid/content/Context;
+                    Ljava/io/InputStream;)Landroid/graphics/Typeface; (0x46) ---> Ljava/io/File;->delete()Z
+               => Landroidx/core/graphics/TypefaceCompatBaseImpl;->createFromResourcesFontFile(Landroid/content/Context;
+                    Landroid/content/res/Resources; I Ljava/lang/String; I)Landroid/graphics/Typeface; (0x1c) ---> Ljava/io/File;->delete()Z
+               => Landroidx/core/graphics/TypefaceCompatBaseImpl;->createFromResourcesFontFile(Landroid/content/Context;
+                    Landroid/content/res/Resources; I Ljava/lang/String; I)Landroid/graphics/Typeface; (0x34) ---> Ljava/io/File;->delete()Z
+               => Landroidx/core/graphics/TypefaceCompatBaseImpl;->createFromResourcesFontFile(Landroid/content/Context;
+                    Landroid/content/res/Resources; I Ljava/lang/String; I)Landroid/graphics/Typeface; (0x3e) ---> Ljava/io/File;->delete()Z
+               => Landroidx/core/graphics/TypefaceCompatBaseImpl;->createFromResourcesFontFile(Landroid/content/Context;
+                    Landroid/content/res/Resources; I Ljava/lang/String; I)Landroid/graphics/Typeface; (0x46) ---> Ljava/io/File;->delete()Z
+               => Landroidx/core/graphics/TypefaceCompatUtil;->copyToDirectBuffer(Landroid/content/Context; Landroid/content/res/Resources;
+                    I)Ljava/nio/ByteBuffer; (0x1c) ---> Ljava/io/File;->delete()Z
+               => Landroidx/core/graphics/TypefaceCompatUtil;->copyToDirectBuffer(Landroid/content/Context; Landroid/content/res/Resources;
+                    I)Ljava/nio/ByteBuffer; (0x2c) ---> Ljava/io/File;->delete()Z
+               => Landroidx/core/graphics/TypefaceCompatUtil;->copyToDirectBuffer(Landroid/content/Context; Landroid/content/res/Resources;
+                    I)Ljava/nio/ByteBuffer; (0x36) ---> Ljava/io/File;->delete()Z
+               => Landroidx/core/util/AtomicFile;->delete()V (0x4) ---> Ljava/io/File;->delete()Z
+               => Landroidx/core/util/AtomicFile;->delete()V (0xe) ---> Ljava/io/File;->delete()Z
+               => Landroidx/core/util/AtomicFile;->failWrite(Ljava/io/FileOutputStream;)V (0x14) ---> Ljava/io/File;->delete()Z
+               => Landroidx/core/util/AtomicFile;->finishWrite(Ljava/io/FileOutputStream;)V (0x14) ---> Ljava/io/File;->delete()Z
+               => Landroidx/core/util/AtomicFile;->openRead()Ljava/io/FileInputStream; (0x14) ---> Ljava/io/File;->delete()Z
+               => Landroidx/core/util/AtomicFile;->startWrite()Ljava/io/FileOutputStream; (0x7e) ---> Ljava/io/File;->delete()Z
+               => Landroidx/multidex/MultiDex;->clearOldDexDir(Landroid/content/Context;)V (0xfa) ---> Ljava/io/File;->delete()Z
+               => Landroidx/multidex/MultiDex;->clearOldDexDir(Landroid/content/Context;)V (0x16e) ---> Ljava/io/File;->delete()Z
+               => Landroidx/multidex/MultiDexExtractor;->clearDexDir()V (0xb2) ---> Ljava/io/File;->delete()Z
+               => Landroidx/multidex/MultiDexExtractor;->extract(Ljava/util/zip/ZipFile; Ljava/util/zip/ZipEntry; Ljava/io/File;
+                    Ljava/lang/String;)V (0x136) ---> Ljava/io/File;->delete()Z
+               => Landroidx/multidex/MultiDexExtractor;->extract(Ljava/util/zip/ZipFile; Ljava/util/zip/ZipEntry; Ljava/io/File;
+                    Ljava/lang/String;)V (0x200) ---> Ljava/io/File;->delete()Z
+               => Lcom/kony/CaptureSignature;->makedirs()Z (0x42) ---> Ljava/io/File;->delete()Z
+               => Lcom/kony/binary/utility/BinaryDataUtils;->writeBase64ToFile(Ljava/lang/String; Ljava/lang/String;)Z (0xb0) --->
+                    Ljava/io/File;->delete()Z
+               => Lcom/kony/binary/utility/BlobStoreUtil;->deleteAllBinaryFiles()Z (0x28) ---> Ljava/io/File;->delete()Z
+               => Lcom/kony/binary/utility/BlobStoreUtil;->deleteBlobFile(Ljava/lang/String;)Z (0x3e) ---> Ljava/io/File;->delete()Z
+               => Lcom/kony/binary/utility/BlobStoreUtil;->deleteBlobFile(Ljava/lang/String;)Z (0xaa) ---> Ljava/io/File;->delete()Z
+               => Lcom/kony/binary/utility/BlobStoreUtil;->renameFile(Ljava/lang/String; Ljava/lang/String;)Z (0x6c) --->
+                    Ljava/io/File;->delete()Z
+               => Lcom/kony/binarydatamanager/util/FileHandler;->deleteFile()V (0x46) ---> Ljava/io/File;->delete()Z
+               => Lcom/kony/logger/LogUtils/LogRotator;->rotateLogFile()V (0x4c) ---> Ljava/io/File;->delete()Z
+               => Lcom/kony/logger/LogUtils/LogRotator;->updateLogRotator(Ljava/lang/String; I I)V (0x148) ---> Ljava/io/File;->delete()Z
+               => Laggggg/cscccs;->b0436Ð¶04360436Ð¶04360436Ð¶([Ljava/lang/Object;)V (0xb8) ---> Ljava/io/File;->delete()Z
+               => Laggggg/cscccs;->b0436Ð¶04360436Ð¶04360436Ð¶([Ljava/lang/Object;)V (0x11c) ---> Ljava/io/File;->delete()Z
+               => Laggggg/cscccs;->b0436Ð¶04360436Ð¶04360436Ð¶([Ljava/lang/Object;)V (0x1ac) ---> Ljava/io/File;->delete()Z
+               => Laggggg/cscccs;->b0436Ð¶04360436Ð¶04360436Ð¶([Ljava/lang/Object;)V (0x2ba) ---> Ljava/io/File;->delete()Z
+               => Laggggg/ssssoo;->bÐÐ041804180418Ð0418Ð(Ljava/io/File;)V (0xee) ---> Ljava/io/File;->delete()Z
+               => Laggggg/ssssoo;->bÐÐ041804180418Ð0418Ð(Ljava/io/File;)V (0x106) ---> Ljava/io/File;->delete()Z
+               => Laggggg/ssssoo;->bÐÐ0418ÐÐ04180418Ð(Ljava/lang/String;)V (0x134) ---> Ljava/io/File;->delete()Z
+               => Landroidx/documentfile/provider/RawDocumentFile;->deleteContents(Ljava/io/File;)Z (0x32) ---> Ljava/io/File;->delete()Z
+               => Landroidx/documentfile/provider/RawDocumentFile;->delete()Z (0xe) ---> Ljava/io/File;->delete()Z
+               => Lcom/android/volley/toolbox/DiskBasedCache;->pruneIfNeeded(I)V (0x8e) ---> Ljava/io/File;->delete()Z
+               => Lcom/android/volley/toolbox/DiskBasedCache;->clear()V (0x20) ---> Ljava/io/File;->delete()Z
+               => Lcom/android/volley/toolbox/DiskBasedCache;->initialize()V (0xb6) ---> Ljava/io/File;->delete()Z
+               => Lcom/android/volley/toolbox/DiskBasedCache;->put(Ljava/lang/String; Lcom/android/volley/Cache$Entry;)V (0x8a) --->
+                    Ljava/io/File;->delete()Z
+               => Lcom/android/volley/toolbox/DiskBasedCache;->remove(Ljava/lang/String;)V (0xa) ---> Ljava/io/File;->delete()Z
+               => Laggggg/wwwsww;->bÐÐÐÐÐÐ041FÐ(Ljava/io/File;)V (0x5e) ---> Ljava/io/File;->delete()Z
+               => Laggggg/wwwsww;->b041FÐÐ041FÐÐ041FÐ(Z)V (0x4c) ---> Ljava/io/File;->delete()Z
+               => Lcom/google/android/gms/common/data/BitmapTeleporter;->zabz()Ljava/io/FileOutputStream; (0x34) --->
+                    Ljava/io/File;->delete()Z
+[Notice] <Debug><Hacker> Codes for Checking Android Debug Mode:
+           Found codes for checking "ApplicationInfo.FLAG_DEBUGGABLE" in AndroidManifest.xml:
+               => Lcom/google/android/gms/common/GoogleSignatureVerifier;->zza (Ljava/lang/String; I)Lcom/google/android/gms/common/zzm;
+               => Lcom/google/android/gms/common/GoogleSignatureVerifier;->zzc (Ljava/lang/String;)Lcom/google/android/gms/common/zzm;
+[Notice] <KeyStore><Hacker> Possible KeyStore File Location:
+           BKS possible keystore file:
+               assets/certs/star_silkbank_com.crt
+               assets/certsold/star_silkbank_com.crt
+               stamp-cert-sha256
+[Notice] <KeyStore><Hacker> KeyStore Protection Information:
+           The Keystores below are "protected" by password and seem using SSL-pinning (Total: 3). You can use "Portecle" tool to manage the
+           certificates in the KeyStore:
+               => Laggggg/llllww;->bÐ041D041DÐ041DÐÐÐ(Ljava/lang/Object;)Z (0xbe) --->
+                    Ljava/security/KeyStore;->load(Ljava/io/InputStream; [C)V
+               => Laggggg/wwllww;->bÐÐÐÐ041D041DÐÐ(Ljava/lang/Object;)Z (0xea) --->
+                    Ljava/security/KeyStore;->load(Ljava/io/InputStream; [C)V
+               => Lcom/kony/sdkcommons/Network/NetworkCore/KNYSSLSocketFactory;->loadClientCertificate(Ljava/lang/Object;)Z (0xc6) --->
+                    Ljava/security/KeyStore;->load(Ljava/io/InputStream; [C)V
+[Notice] <Signature><Hacker> Getting Signature Code Checking:
+           This app has code checking the package signature in the code. It might be used to check for whether the app is hacked by the
+           attackers.
+               => Laggggg/rrjrjr;->bÐ®Ð®Ð®Ð®042EÐ®042EÐ®()Ljava/util/ArrayList; (0x3a) --->
+                    Landroid/content/pm/PackageManager;->getPackageInfo(Ljava/lang/String; I)Landroid/content/pm/PackageInfo;
+               => Landroidx/core/provider/FontsContractCompat;->getProvider(Landroid/content/pm/PackageManager;
+                    Landroidx/core/provider/FontRequest; Landroid/content/res/Resources;)Landroid/content/pm/ProviderInfo; (0x36) --->
+                    Landroid/content/pm/PackageManager;->getPackageInfo(Ljava/lang/String; I)Landroid/content/pm/PackageInfo;
+               => Lcom/google/android/gms/common/GooglePlayServicesUtilLight;->zza(Landroid/content/Context; Z I)I (0x50) --->
+                    Landroid/content/pm/PackageManager;->getPackageInfo(Ljava/lang/String; I)Landroid/content/pm/PackageInfo;
+               => Lcom/google/android/gms/common/util/UidVerifier;->isGooglePlayServicesUid(Landroid/content/Context; I)Z (0x20) --->
+                    Landroid/content/pm/PackageManager;->getPackageInfo(Ljava/lang/String; I)Landroid/content/pm/PackageInfo;
+               => Lcom/google/android/gms/common/wrappers/PackageManagerWrapper;->zza(Ljava/lang/String; I
+                    I)Landroid/content/pm/PackageInfo; (0x10) ---> Landroid/content/pm/PackageManager;->getPackageInfo(Ljava/lang/String;
+                    I)Landroid/content/pm/PackageInfo;
+[Notice]  Native Library Loading Checking:
+           Native library loading codes(System.loadLibrary(...)) found:
+               [libc++_shared.so]
+               => Laggggg/neeene$1;->run()V (0x2a) ---> Ljava/lang/System;->loadLibrary(Ljava/lang/String;)V
+               [libkonyjsvm.so]
+               => Laggggg/neeene$1;->run()V (0x36) ---> Ljava/lang/System;->loadLibrary(Ljava/lang/String;)V
+               [librsjni_androidx.so]
+               => Landroidx/renderscript/RenderScript;->internalCreate(Landroid/content/Context; I
+                    Landroidx/renderscript/RenderScript$ContextType; I)Landroidx/renderscript/RenderScript; (0x10e) --->
+                    Ljava/lang/System;->loadLibrary(Ljava/lang/String;)V
+               [libRSSupport.so]
+               => Landroidx/renderscript/RenderScript;->internalCreate(Landroid/content/Context; I
+                    Landroidx/renderscript/RenderScript$ContextType; I)Landroidx/renderscript/RenderScript; (0x256) --->
+                    Ljava/lang/System;->loadLibrary(Ljava/lang/String;)V
+               [libRSSupportIO.so]
+               => Landroidx/renderscript/RenderScript;->internalCreate(Landroid/content/Context; I
+                    Landroidx/renderscript/RenderScript$ContextType; I)Landroidx/renderscript/RenderScript; (0x310) --->
+                    Ljava/lang/System;->loadLibrary(Ljava/lang/String;)V
+               [libblasV8.so]
+               => Landroidx/renderscript/RenderScript;->internalCreate(Landroid/content/Context; I
+                    Landroidx/renderscript/RenderScript$ContextType; I)Landroidx/renderscript/RenderScript; (0x34e) --->
+                    Ljava/lang/System;->loadLibrary(Ljava/lang/String;)V
+               [libRSSupport.so]
+               => Landroidx/renderscript/RenderScript;->nScriptIntrinsicCreate(I J Z)J (0x24) --->
+                    Ljava/lang/System;->loadLibrary(Ljava/lang/String;)V
+               [libcrypto_1_0_0.so]
+               => Lcom/kony/sdkcommons/Database/SQLiteCipherDatabaseHelper;->loadSQLCipherLibs(Landroid/content/Context;)V (0xb2) --->
+                    Ljava/lang/System;->loadLibrary(Ljava/lang/String;)V
+------------------------------------------------------------
+AndroBugs analyzing time: 14.745 secs
+Total elapsed time: 53.29 secs
